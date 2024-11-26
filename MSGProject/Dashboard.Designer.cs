@@ -53,9 +53,6 @@
             this.BestelALabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.BestellingenGebruikerTab = new System.Windows.Forms.TabPage();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.BestelAButton1 = new MaterialSkin.Controls.MaterialButton();
-            this.BestelAButton2 = new MaterialSkin.Controls.MaterialButton();
-            this.BestelAButton3 = new MaterialSkin.Controls.MaterialButton();
             this.materialTabControl1.SuspendLayout();
             this.BestellingenTab.SuspendLayout();
             this.SuspendLayout();
@@ -365,66 +362,6 @@
             this.imageList1.Images.SetKeyName(1, "truck-32.png");
             this.imageList1.Images.SetKeyName(2, "user-32.png");
             this.imageList1.Images.SetKeyName(3, "home-32.png");
-            // 
-            // BestelAButton1
-            // 
-            this.BestelAButton1.AutoSize = false;
-            this.BestelAButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BestelAButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.BestelAButton1.Depth = 0;
-            this.BestelAButton1.HighEmphasis = true;
-            this.BestelAButton1.Icon = null;
-            this.BestelAButton1.Location = new System.Drawing.Point(76, 421);
-            this.BestelAButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.BestelAButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.BestelAButton1.Name = "BestelAButton1";
-            this.BestelAButton1.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.BestelAButton1.Size = new System.Drawing.Size(260, 36);
-            this.BestelAButton1.TabIndex = 11;
-            this.BestelAButton1.Text = "Aanpassen";
-            this.BestelAButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.BestelAButton1.UseAccentColor = false;
-            this.BestelAButton1.UseVisualStyleBackColor = true;
-            // 
-            // BestelAButton2
-            // 
-            this.BestelAButton2.AutoSize = false;
-            this.BestelAButton2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BestelAButton2.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.BestelAButton2.Depth = 0;
-            this.BestelAButton2.HighEmphasis = true;
-            this.BestelAButton2.Icon = null;
-            this.BestelAButton2.Location = new System.Drawing.Point(76, 482);
-            this.BestelAButton2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.BestelAButton2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.BestelAButton2.Name = "BestelAButton2";
-            this.BestelAButton2.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.BestelAButton2.Size = new System.Drawing.Size(127, 36);
-            this.BestelAButton2.TabIndex = 12;
-            this.BestelAButton2.Text = "Toevoegen";
-            this.BestelAButton2.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.BestelAButton2.UseAccentColor = false;
-            this.BestelAButton2.UseVisualStyleBackColor = true;
-            // 
-            // BestelAButton3
-            // 
-            this.BestelAButton3.AutoSize = false;
-            this.BestelAButton3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BestelAButton3.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.BestelAButton3.Depth = 0;
-            this.BestelAButton3.HighEmphasis = true;
-            this.BestelAButton3.Icon = null;
-            this.BestelAButton3.Location = new System.Drawing.Point(211, 482);
-            this.BestelAButton3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.BestelAButton3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.BestelAButton3.Name = "BestelAButton3";
-            this.BestelAButton3.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.BestelAButton3.Size = new System.Drawing.Size(125, 36);
-            this.BestelAButton3.TabIndex = 13;
-            this.BestelAButton3.Text = "Verwijderen";
-            this.BestelAButton3.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.BestelAButton3.UseAccentColor = false;
-            this.BestelAButton3.UseVisualStyleBackColor = true;
             // 
             // Dashboard
             // 
