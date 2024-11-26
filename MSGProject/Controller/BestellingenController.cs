@@ -88,9 +88,5 @@ namespace MSGProject.Controllers
                 command.ExecuteNonQuery();
             }
         }
-
-
-
-
     }
 }
