@@ -110,6 +110,8 @@
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\BestellingenModel.cs" />
+    <Compile Include="Model\GebruikerModel.cs" />
+    <Compile Include="Model\Menu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Dashboard.resx">
