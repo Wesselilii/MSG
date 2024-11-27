@@ -25,7 +25,6 @@ namespace MSGProject
         }
 
         // ---------------- BESTELLINGEN -------------------------------------------------------------------------------------------
-
         private void Load_Bestellingen()
         {
             try
