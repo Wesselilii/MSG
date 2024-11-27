@@ -102,6 +102,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\BestellingenController.cs" />
+    <Compile Include="Controller\LoginController.cs" />
     <Compile Include="Controller\Helper.cs" />
     <Compile Include="Controller\MenuController.cs" />
     <Compile Include="Dashboard.cs">
@@ -110,6 +112,8 @@
     <Compile Include="Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\BestellingenModel.cs" />
+    <Compile Include="Model\GebruikerModel.cs" />
     <Compile Include="Model\Menu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -149,6 +153,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
