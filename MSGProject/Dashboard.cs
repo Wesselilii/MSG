@@ -9,6 +9,7 @@ namespace MSGProject
     public partial class Dashboard : MaterialForm
     {
         readonly MaterialSkin.MaterialSkinManager materialSkinManager;
+        private GebruikerModel _currentUser;
         public Dashboard()
         {
             InitializeComponent();
@@ -21,10 +22,101 @@ namespace MSGProject
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
+            // If no user is logged in, show only the HomeTab and disable all other tabs
+            if (_currentUser == null)
+            {
+                DisableAllTabsExceptHome();
+            }
+            else
+            {
+                Load_RoleChecker();
+            }
             Load_Bestellingen();
         }
 
-        // ---------------- BESTELLINGEN -------------------------------------------------------------------------------------------
+        // ---------------- LOGIN ------------------------------------------------------------------------------------------------------
+        private void HomeLButton1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string email = HomeLTextBox1.Text;
+                string password = HomeLTextBox2.Text;
+
+                // Authenticate user via LoginController
+                var loginController = new LoginController();
+                var user = loginController.AuthenticateUser(email, password);
+
+                if (user != null)
+                {
+                    MessageBox.Show($"Welkom, {user.Gebruiker_Voornaam} {user.Gebruiker_Achternaam}!");
+
+                    // Store the authenticated user in the _currentUser variable
+                    _currentUser = user;
+
+                    // Check if the user is an admin and handle tab visibility accordingly
+                    if (user.Gebruiker_Rol == "Admin")
+                    {
+
+                        BestellingenTab.Enabled = true; // Admin can access Bestellingen
+                    }
+                    else
+                    {
+                        BestellingenTab.Enabled = false; // Non-admins cannot access Bestellingen
+                    }
+                    Load_RoleChecker();
+                }
+                else
+                {
+                    MessageBox.Show("Ongeldige Email of Wachtwoord.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error bij het inloggen: {ex.Message}");
+            }
+        }
+
+        // ---------------- ROLE CHECKER ---------------------------------------
+        private void Load_RoleChecker()
+        {
+            // Only proceed if the current user exists (meaning they're logged in)
+            if (_currentUser != null && _currentUser.Gebruiker_Rol != "Admin")
+            {
+                // If the user is not an admin, remove the Bestellingen tab from the tabs list
+                materialTabControl1.TabPages.Remove(BestellingenTab);
+            }
+        }
+
+        private void DisableAllTabsExceptHome()
+        {
+            foreach (TabPage tabPage in materialTabControl1.TabPages)
+            {
+                if (tabPage != HomeTab)
+                {
+                    materialTabControl1.TabPages.Remove(tabPage);
+                }
+            }
+        }
+
+        private void RestoreTabs()
+        {
+            // Make sure all the necessary tabs are added back before role checks
+            if (!materialTabControl1.TabPages.Contains(HomeTab))
+            {
+                materialTabControl1.TabPages.Add(HomeTab);  // Add HomeTab back if it's missing
+            }
+
+            // Add other tabs back if they were removed previously
+            if (!materialTabControl1.TabPages.Contains(BestellingenTab))
+            {
+                materialTabControl1.TabPages.Add(GebruikersTab);
+                materialTabControl1.TabPages.Add(MaaltijdTab);
+                materialTabControl1.TabPages.Add(BestellingenTab);
+            }
+        }
+
+
+    // ---------------- BESTELLINGEN --- Administratie -----------------------------------------------------------------------------
         private void Load_Bestellingen()
         {
             try
@@ -32,48 +124,51 @@ namespace MSGProject
                 // Clear existing items in the ListView
                 BestelAListView1.Items.Clear();
 
-                // Instantiate the controller and get data
+                // get the controller data
                 var bestellingController = new BestellingenController();
                 var bestellingen = bestellingController.GetBestellingen();
 
                 foreach (var bestelling in bestellingen)
                 {
-                    // Combine Voornaam and Achternaam for display in ListView
+                    // Combine First Name and Last Name for display in the ListView
                     string fullName = $"{bestelling.Gebruiker_Voornaam} {bestelling.Gebruiker_Achternaam}";
-
-                    // Add a new row to the ListView
                     var item = new ListViewItem(bestelling.Bestelling_Id.ToString());
-                    item.SubItems.Add(fullName); // Full name in second column
+
+                    item.SubItems.Add(fullName);
                     item.SubItems.Add(bestelling.Menu_Id.ToString());
                     item.SubItems.Add(bestelling.Bestelling_Datum.ToString("yyyy-MM-dd"));
                     item.SubItems.Add(bestelling.Bestelling_Status);
 
-                    // Attach the ID to Tag for future reference
+                    // Attach the order ID to the Tag property for future reference
                     item.Tag = bestelling.Bestelling_Id;
 
+                    // Add the constructed item(s) to the ListView
                     BestelAListView1.Items.Add(item);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred: " + ex.Message);
+                MessageBox.Show("error bij het laden van bestellingen: " + ex.Message);
             }
         }
 
-        // -------- Aanpassen knop (Update Button) ---------
+        // -------- Aanpassen button ---------
         private void BestelAButton1_Click(object sender, EventArgs e)
         {
+            // Ensure an item is selected in the ListView
             if (BestelAListView1.SelectedItems.Count > 0)
             {
                 try
                 {
-                    int bestellingId = int.Parse(BestelATextbox1.Text);
-                    string voornaam = BestelATextbox2.Text;
-                    string achternaam = BestelATextbox3.Text;
-                    int menuId = int.Parse(BestelATextbox4.Text);
-                    DateTime datum = BestelADateTimePicker.Value;
-                    string status = BestelACombobox1.Text;
+                    // Gather data from input fields
+                    int bestellingId = int.Parse(BestelATextbox1.Text); // Order ID
+                    string voornaam = BestelATextbox2.Text; // First Name
+                    string achternaam = BestelATextbox3.Text; // Last Name
+                    int menuId = int.Parse(BestelATextbox4.Text); // Menu ID
+                    DateTime datum = BestelADateTimePicker.Value; // Order Date
+                    string status = BestelACombobox1.Text; // Order Status
 
+                    // Create a new Bestelling model with updated data
                     var updatedBestelling = new BestellingenModel
                     {
                         Bestelling_Id = bestellingId,
@@ -84,44 +179,48 @@ namespace MSGProject
                         Bestelling_Status = status
                     };
 
+                    // Update the order via the controller
                     var controller = new BestellingenController();
                     controller.UpdateBestelling(updatedBestelling);
+
+                    // Reload the ListView to reflect changes
                     Load_Bestellingen();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("An error occurred: " + ex.Message);
+                    MessageBox.Show("error bij het aanpassen van een item: " + ex.Message);
                 }
             }
             else
             {
-                MessageBox.Show("Selecteer een bestelling om aan te passen.");
+                MessageBox.Show("Selecteer een item om aan te passen.");
             }
         }
 
-        // -------- Toevoegen knop (Add Button) ---------
+        // -------- Toevoegen button ---------
         private void BestelAButton2_Click(object sender, EventArgs e)
         {
             try
             {
                 // Gather data from input fields
-                string gebruikerVoornaam = BestelATextbox2.Text;  // Gebruiker Voornaam
-                string gebruikerAchternaam = BestelATextbox3.Text;  // Gebruiker Achternaam
-                int menuId = int.Parse(BestelATextbox4.Text);  // Menu Id
-                DateTime datum = BestelADateTimePicker.Value;  // Bestelling Datum (DateTimePicker)
-                string status = BestelACombobox1.SelectedItem.ToString();  // Bestelling Status (ComboBox)
+                string gebruikerVoornaam = BestelATextbox2.Text; // User First Name
+                string gebruikerAchternaam = BestelATextbox3.Text; // User Last Name
+                int menuId = int.Parse(BestelATextbox4.Text); // Menu ID
+                DateTime datum = BestelADateTimePicker.Value; // Order Date
+                string status = BestelACombobox1.SelectedItem.ToString(); // Order Status
 
-                // Find Gebruiker_Id based on Voornaam and Achternaam
+                // Retrieve User ID based on First and Last Name
                 var controller = new BestellingenController();
                 int gebruikerId = controller.GetGebruikerId(gebruikerVoornaam, gebruikerAchternaam);
 
                 if (gebruikerId == 0)
                 {
-                    MessageBox.Show("Gebruiker niet gevonden. Controleer de voornaam en achternaam.");
+                    // Inform the user if no matching user is found
+                    MessageBox.Show("Gebruiker niet gevonden. Check de voor & achternaam.");
                     return;
                 }
 
-                // Create new Bestelling model
+                // Create a new Bestelling model with input data
                 var newBestelling = new BestellingenModel
                 {
                     Gebruiker_Id = gebruikerId,
@@ -132,62 +231,62 @@ namespace MSGProject
                     Bestelling_Status = status
                 };
 
-                // Add the bestelling via controller
+                // Add the order via the controller
                 controller.AddBestelling(newBestelling);
-
-                // Refresh the ListView
                 Load_Bestellingen();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred while adding bestelling: " + ex.Message);
+                MessageBox.Show("Fout met het toevoegen van order: " + ex.Message);
             }
         }
 
-        // -------- Verwijderen knop (Delete Button) ---------
+        // -------- Verwijderen button ---------
         private void BestelAButton3_Click(object sender, EventArgs e)
         {
+            // Ensure an item is selected in the ListView
             if (BestelAListView1.SelectedItems.Count > 0)
             {
                 try
                 {
-                    // Get the selected item's ID from Tag (which stores the Bestelling_Id)
+                    // Retrieve the selected order's ID from the Tag property
                     int bestellingId = (int)BestelAListView1.SelectedItems[0].Tag;
 
-                    // Delete the bestelling via controller
+                    // Delete the order via the controller
                     var controller = new BestellingenController();
                     controller.DeleteBestelling(bestellingId);
 
-                    // Refresh the ListView
+                    // Reload the ListView to reflect changes
                     Load_Bestellingen();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("An error occurred while deleting bestelling: " + ex.Message);
+                    MessageBox.Show("Fout bij het verwijderen van gebruiker: " + ex.Message);
                 }
             }
             else
             {
-                MessageBox.Show("Selecteer een bestelling om te verwijderen.");
+                MessageBox.Show("Selecteer een item om te verwijderen.");
             }
         }
 
-        // ------- Interactieve Listview (ListView Item Selection) -------
+        // ------- ListView Item Selection Event -------
         private void BestelAListView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (BestelAListView1.SelectedItems.Count > 0)
             {
                 var selectedItem = BestelAListView1.SelectedItems[0];
 
-                // Split the full name to populate separate textboxes
+                // Split the full name into 2 to populate separate the textboxes
                 string[] fullName = selectedItem.SubItems[1].Text.Split(' ');
 
-                BestelATextbox1.Text = selectedItem.SubItems[0].Text; // Bestelling_Id
-                BestelATextbox2.Text = fullName.Length > 0 ? fullName[0] : ""; // Voornaam
-                BestelATextbox3.Text = fullName.Length > 1 ? fullName[1] : ""; // Achternaam
-                BestelATextbox4.Text = selectedItem.SubItems[2].Text; // Menu_Id
-                BestelADateTimePicker.Value = DateTime.Parse(selectedItem.SubItems[3].Text); // Bestelling_Datum
-                BestelACombobox1.Text = selectedItem.SubItems[4].Text; // Bestelling_Status
+                // Populate the input fields with selected item data
+                BestelATextbox1.Text = selectedItem.SubItems[0].Text; 
+                BestelATextbox2.Text = fullName.Length > 0 ? fullName[0] : "";
+                BestelATextbox3.Text = fullName.Length > 1 ? fullName[1] : "";
+                BestelATextbox4.Text = selectedItem.SubItems[2].Text;
+                BestelADateTimePicker.Value = DateTime.Parse(selectedItem.SubItems[3].Text);
+                BestelACombobox1.Text = selectedItem.SubItems[4].Text;
             }
         }
     }

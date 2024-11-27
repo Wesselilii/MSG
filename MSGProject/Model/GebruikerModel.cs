@@ -10,6 +10,9 @@ namespace MSGProject.Model
     {
         public int Gebruiker_Id { get; set; }
         public string Gebruiker_Voornaam { get; set; }
-        public string Gebruiker_Naam { get; set; }
+        public string Gebruiker_Achternaam { get; set; }
+        public string Gebruiker_Email { get; set; }
+        public string Gebruiker_Wachtwoord { get; set; }
+        public string Gebruiker_Rol { get; set; }
     }
 }
