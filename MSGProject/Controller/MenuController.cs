@@ -95,6 +95,47 @@ namespace MSGProject.Controller
             }
         }
 
+        // Get a menu item by ID
+        public static MenuModel GetMenuById(int menuId)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(Helper.ConnectionString))
+                {
+                    string query = @"SELECT Menu_Id, Menu_Naam, Menu_Beschrijving, Menu_Type, Menu_Prijs, Menu_Beschikbaar
+                             FROM Menu
+                             WHERE Menu_Id = @MenuId";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@MenuId", menuId);
+
+                    conn.Open();
+
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        return new MenuModel
+                        {
+                            MenuId = reader.GetInt32("Menu_Id"),
+                            MenuNaam = reader.GetString("Menu_Naam"),
+                            MenuBeschrijving = reader.IsDBNull(reader.GetOrdinal("Menu_Beschrijving")) ? null : reader.GetString("Menu_Beschrijving"),
+                            MenuType = reader.GetString("Menu_Type"),
+                            MenuPrijs = reader.GetDecimal("Menu_Prijs"),
+                            MenuBeschikbaar = reader.GetBoolean("Menu_Beschikbaar")
+                        };
+                    }
+                    else
+                    {
+                        return null; // No menu found with the provided ID
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to fetch the menu item. Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+
         // Read all menu items
         public static List<MenuModel> GetAllMenus()
         {
