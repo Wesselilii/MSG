@@ -9,7 +9,6 @@ namespace MSGProject
     public partial class Dashboard : MaterialForm
     {
         readonly MaterialSkin.MaterialSkinManager materialSkinManager;
-        private GebruikerModel _currentUser;
         public Dashboard()
         {
             InitializeComponent();
@@ -22,99 +21,8 @@ namespace MSGProject
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
-            // If no user is logged in, show only the HomeTab and disable all other tabs
-            if (_currentUser == null)
-            {
-                DisableAllTabsExceptHome();
-            }
-            else
-            {
-                Load_RoleChecker();
-            }
             Load_Bestellingen();
         }
-
-        // ---------------- LOGIN ------------------------------------------------------------------------------------------------------
-        private void HomeLButton1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string email = HomeLTextBox1.Text;
-                string password = HomeLTextBox2.Text;
-
-                // Authenticate user via LoginController
-                var loginController = new LoginController();
-                var user = loginController.AuthenticateUser(email, password);
-
-                if (user != null)
-                {
-                    MessageBox.Show($"Welkom, {user.Gebruiker_Voornaam} {user.Gebruiker_Achternaam}!");
-
-                    // Store the authenticated user in the _currentUser variable
-                    _currentUser = user;
-
-                    // Check if the user is an admin and handle tab visibility accordingly
-                    if (user.Gebruiker_Rol == "Admin")
-                    {
-
-                        BestellingenTab.Enabled = true; // Admin can access Bestellingen
-                    }
-                    else
-                    {
-                        BestellingenTab.Enabled = false; // Non-admins cannot access Bestellingen
-                    }
-                    Load_RoleChecker();
-                }
-                else
-                {
-                    MessageBox.Show("Ongeldige Email of Wachtwoord.");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error bij het inloggen: {ex.Message}");
-            }
-        }
-
-        // ---------------- ROLE CHECKER ---------------------------------------
-        private void Load_RoleChecker()
-        {
-            // Only proceed if the current user exists (meaning they're logged in)
-            if (_currentUser != null && _currentUser.Gebruiker_Rol != "Admin")
-            {
-                // If the user is not an admin, remove the Bestellingen tab from the tabs list
-                materialTabControl1.TabPages.Remove(BestellingenTab);
-            }
-        }
-
-        private void DisableAllTabsExceptHome()
-        {
-            foreach (TabPage tabPage in materialTabControl1.TabPages)
-            {
-                if (tabPage != HomeTab)
-                {
-                    materialTabControl1.TabPages.Remove(tabPage);
-                }
-            }
-        }
-
-        private void RestoreTabs()
-        {
-            // Make sure all the necessary tabs are added back before role checks
-            if (!materialTabControl1.TabPages.Contains(HomeTab))
-            {
-                materialTabControl1.TabPages.Add(HomeTab);  // Add HomeTab back if it's missing
-            }
-
-            // Add other tabs back if they were removed previously
-            if (!materialTabControl1.TabPages.Contains(BestellingenTab))
-            {
-                materialTabControl1.TabPages.Add(GebruikersTab);
-                materialTabControl1.TabPages.Add(MaaltijdTab);
-                materialTabControl1.TabPages.Add(BestellingenTab);
-            }
-        }
-
 
     // ---------------- BESTELLINGEN --- Administratie -----------------------------------------------------------------------------
         private void Load_Bestellingen()

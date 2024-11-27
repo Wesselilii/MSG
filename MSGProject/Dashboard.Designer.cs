@@ -459,7 +459,6 @@
             this.HomeLButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.HomeLButton1.UseAccentColor = false;
             this.HomeLButton1.UseVisualStyleBackColor = true;
-            this.HomeLButton1.Click += new System.EventHandler(this.HomeLButton1_Click);
             // 
             // HomeLTextBox2
             // 
