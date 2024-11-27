@@ -2,6 +2,7 @@
 using MSGProject.Controllers;
 using MSGProject.Model;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace MSGProject
@@ -21,10 +22,74 @@ namespace MSGProject
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
+            Load_GBestellen();
             Load_Bestellingen();
         }
 
-    // ---------------- BESTELLINGEN --- Administratie -----------------------------------------------------------------------------
+
+
+        // ---------------- BESTELLINGEN --- Gebruiker ---------------------------------------------------------------------------------
+        private void Load_GBestellen()
+        {
+            try
+            {
+                // Clear any existing items in the ListView
+                BestelGListView1.Items.Clear();
+
+                // Get the menu items using the controller
+                List<MenuModel> menuList = BestellenController.GetBestellen();
+
+                // Loop through the list and add items to the ListView
+                foreach (var menu in menuList)
+                {
+                    // Create a ListView item, using Menu_Naam as the first visible column
+                    var item = new ListViewItem(menu.Menu_Naam);
+
+                    // Add the remaining subitems (Type, Prijs, Beschrijving)
+                    item.SubItems.Add(menu.Menu_Type);
+                    item.SubItems.Add(menu.Menu_Prijs.ToString("C"));  // Format the price as currency
+                    item.SubItems.Add(menu.Menu_Beschrijving);
+
+                    // Store the MenuId in the Tag property (not visible to the user)
+                    item.Tag = menu.MenuId;
+
+                    // Add the item to the ListView
+                    BestelGListView1.Items.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Show an error message if something goes wrong
+                MessageBox.Show("error bij het laden van deze pagina: " + ex.Message);
+            }
+        }
+
+        private void BestelGListView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (BestelGListView1.SelectedItems.Count > 0)
+            {
+                var selectedItem = BestelGListView1.SelectedItems[0];
+
+                // Retrieve the ID from the Tag
+                int selectedMenuId = (int)selectedItem.Tag;
+
+                // Populate textboxes with visible data
+                BestelGTextbox1.Text = selectedItem.SubItems[0].Text;  // Menu_Naam
+                BestelGTextbox2.Text = selectedItem.SubItems[1].Text;  // Menu_Type
+                BestelGTextbox3.Text = selectedItem.SubItems[2].Text;  // Menu_Prijs
+                BestelGTextbox4.Text = selectedItem.SubItems[3].Text;  // Menu_Beschrijving
+
+                // Disable editing in textboxes
+                BestelGTextbox1.Enabled = false;
+                BestelGTextbox2.Enabled = false;
+                BestelGTextbox3.Enabled = false;
+                BestelGTextbox4.Enabled = false;
+
+                Console.WriteLine($"Selected Menu ID: {selectedMenuId}");
+            }
+        }
+
+        // ---------------- BESTELLINGEN --- Administratie -----------------------------------------------------------------------------
         private void Load_Bestellingen()
         {
             try
@@ -56,7 +121,7 @@ namespace MSGProject
             }
             catch (Exception ex)
             {
-                MessageBox.Show("error bij het laden van bestellingen: " + ex.Message);
+                MessageBox.Show("error bij het laden van deze pagina: " + ex.Message);
             }
         }
 

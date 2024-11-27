@@ -8,11 +8,11 @@ namespace MSGProject.Model
 {
     public class MenuModel
     {
-        public int MenuId { get; set; } // Maps to Menu_Id
-        public string MenuNaam { get; set; } // Maps to Menu_Naam
-        public string MenuBeschrijving { get; set; } // Maps to Menu_Beschrijving
-        public string MenuType { get; set; } // Maps to Menu_Type
-        public decimal MenuPrijs { get; set; } // Maps to Menu_Prijs
-        public bool? MenuBeschikbaar { get; set; } // Maps to Menu_Beschikbaar
+        public int MenuId { get; set; }
+        public string Menu_Naam { get; set; }
+        public string Menu_Beschrijving { get; set; }
+        public string Menu_Type { get; set; }
+        public decimal Menu_Prijs { get; set; }
+        public bool? Menu_Beschikbaar { get; set; }
     }
 }
