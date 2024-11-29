@@ -25,13 +25,7 @@ namespace MSGProject
             materialSkinManager.EnforceBackcolorOnAllComponents = true;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
-            materialSkinManager.ColorScheme = new MaterialSkin.ColorScheme(
-                MaterialSkin.Primary.Indigo500,
-                MaterialSkin.Primary.Indigo700,
-                MaterialSkin.Primary.Indigo100,
-                MaterialSkin.Accent.Pink200,
-                MaterialSkin.TextShade.WHITE
-            );
+            materialSkinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Indigo500, MaterialSkin.Primary.Indigo700, MaterialSkin.Primary.Indigo100, MaterialSkin.Accent.Pink200, MaterialSkin.TextShade.WHITE);
         }
 
         // Harm --------------- Welcome User ----------------------------------------------------------------------------
@@ -40,11 +34,53 @@ namespace MSGProject
         {
             // Display a welcome message
             Dashboard_Welcome_Label.Text = $"Welcome, {_currentUser.Gebruiker_Voornaam} {_currentUser.Gebruiker_Achternaam}!";
-
+        
             // Show or hide tabs based on user role
             UpdateTabsVisibility();
         }
 
+
+        // ---------------- BESTELLINGEN --- Gebruiker ---------------------------------------------------------------------------------
+        private void Load_GBestellen()
+        {
+            try
+            {
+                // Clear any existing items in the ListView
+                BestelGListView1.Items.Clear();
+
+                // Get the menu items using the controller
+                List<MenuModel> menuList = BestellenController.GetBestellen();
+
+                // Add items to the ListView
+                foreach (var menu in menuList)
+                {
+                    var item = new ListViewItem(menu.Menu_Naam);
+                    item.SubItems.Add(menu.Menu_Type);
+                    item.SubItems.Add(menu.Menu_Prijs.ToString("C"));
+                    item.SubItems.Add(menu.Menu_Beschrijving);
+
+                    // Store the MenuId
+                    item.Tag = menu.MenuId;
+
+                    // Add the item to the ListView
+                    BestelGListView1.Items.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("error bij het laden van deze pagina: " + ex.Message);
+            }
+        }
+
+        private void BestelGListView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (BestelGListView1.SelectedItems.Count > 0)
+            {
+                var selectedItem = BestelGListView1.SelectedItems[0];
+
+                // Retrieve the ID number from the MenuId Tag
+                int selectedMenuId = (int)selectedItem.Tag;
+                }
         private void UpdateTabsVisibility()
         {
             // Remove all tabs initially
@@ -57,7 +93,12 @@ namespace MSGProject
             {
                 materialTabControl1.TabPages.Remove(tabPage);
             }
-
+                // Populate textboxes with visible data
+                BestelGTextbox1.Text = selectedItem.SubItems[0].Text;  // Menu_Naam
+                BestelGTextbox2.Text = selectedItem.SubItems[1].Text;  // Menu_Type
+                BestelGTextbox3.Text = selectedItem.SubItems[2].Text;  // Menu_Prijs
+                BestelGTextbox4.Text = selectedItem.SubItems[3].Text;  // Menu_Beschrijving
+            // Only proceed if the current user exists (meaning they're logged in)
             // Add tabs based on the current user's role
             switch (_currentUser.Gebruiker_Rol.ToLower())
             {
@@ -71,7 +112,12 @@ namespace MSGProject
                     materialTabControl1.TabPages.Add(MaaltijdTab);
                     materialTabControl1.TabPages.Add(BestellingenTab);
                     break;
-
+                // Disable editing in textboxes
+                BestelGTextbox1.Enabled = false;
+                BestelGTextbox2.Enabled = false;
+                BestelGTextbox3.Enabled = false;
+                BestelGTextbox4.Enabled = false;
+        private void DisableAllTabsExceptHome()
                 case "administratie":
                     materialTabControl1.TabPages.Add(HomeTab);
                     materialTabControl1.TabPages.Add(GebruikersTab);
@@ -82,11 +128,47 @@ namespace MSGProject
                 default:
                     materialTabControl1.TabPages.Add(HomeTab); // Default tab for unrecognized roles
                     break;
+                }
+            }
+        }
+
+        // ---------------- BESTELLINGEN --- Administratie -----------------------------------------------------------------------------
+        {
+            // Make sure all the necessary tabs are added back before role checks
+            if (!materialTabControl1.TabPages.Contains(HomeTab))
+            {
+                materialTabControl1.TabPages.Add(HomeTab);  // Add HomeTab back if it's missing
+            }
+        private void DisableAllTabsExceptHome()
+            // Add other tabs back if they were removed previously
+            if (!materialTabControl1.TabPages.Contains(BestellingenTab))
+            {
+                materialTabControl1.TabPages.Add(GebruikersTab);
+                materialTabControl1.TabPages.Add(MaaltijdTab);
+                materialTabControl1.TabPages.Add(BestellingenTab);
+                }
+            }
+        }
+
+    // ---------------- BESTELLINGEN --- Administratie -----------------------------------------------------------------------------
+        {
+            // Make sure all the necessary tabs are added back before role checks
+            if (!materialTabControl1.TabPages.Contains(HomeTab))
+            {
+                materialTabControl1.TabPages.Add(HomeTab);  // Add HomeTab back if it's missing
+            }
+
+            // Add other tabs back if they were removed previously
+            if (!materialTabControl1.TabPages.Contains(BestellingenTab))
+            {
+                materialTabControl1.TabPages.Add(GebruikersTab);
+                materialTabControl1.TabPages.Add(MaaltijdTab);
+                materialTabControl1.TabPages.Add(BestellingenTab);
             }
         }
 
 
-        // ---------------- BESTELLINGEN --- Administratie -----------------------------------------------------------------------------
+    // ---------------- BESTELLINGEN --- Administratie -----------------------------------------------------------------------------
         private void Load_Bestellingen()
         {
             try
@@ -94,7 +176,7 @@ namespace MSGProject
                 // Clear existing items in the ListView
                 BestelAListView1.Items.Clear();
 
-                // get the controller data
+                // Get the controller data
                 var bestellingController = new BestellingenController();
                 var bestellingen = bestellingController.GetBestellingen();
 
@@ -103,7 +185,6 @@ namespace MSGProject
                     // Combine First Name and Last Name for display in the ListView
                     string fullName = $"{bestelling.Gebruiker_Voornaam} {bestelling.Gebruiker_Achternaam}";
                     var item = new ListViewItem(bestelling.Bestelling_Id.ToString());
-
                     item.SubItems.Add(fullName);
                     item.SubItems.Add(bestelling.Menu_Id.ToString());
                     item.SubItems.Add(bestelling.Bestelling_Datum.ToString("yyyy-MM-dd"));
@@ -118,7 +199,7 @@ namespace MSGProject
             }
             catch (Exception ex)
             {
-                MessageBox.Show("error bij het laden van bestellingen: " + ex.Message);
+                MessageBox.Show("error bij het laden van deze pagina: " + ex.Message);
             }
         }
 
@@ -201,13 +282,13 @@ namespace MSGProject
                     Bestelling_Status = status
                 };
 
-                // Add the order via the controller
+                // Add the Bestelling via the controller
                 controller.AddBestelling(newBestelling);
                 Load_Bestellingen();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Fout met het toevoegen van order: " + ex.Message);
+                MessageBox.Show("Fout met het toevoegen van een bestelling: " + ex.Message);
             }
         }
 
@@ -219,19 +300,17 @@ namespace MSGProject
             {
                 try
                 {
-                    // Retrieve the selected order's ID from the Tag property
+                    // Retrieve the selected Bestelling ID from the Tag Bestelling_Id
                     int bestellingId = (int)BestelAListView1.SelectedItems[0].Tag;
 
-                    // Delete the order via the controller
+                    // Delete the Bestelling via the controller
                     var controller = new BestellingenController();
                     controller.DeleteBestelling(bestellingId);
-
-                    // Reload the ListView to reflect changes
                     Load_Bestellingen();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Fout bij het verwijderen van gebruiker: " + ex.Message);
+                    MessageBox.Show("Fout bij het verwijderen van een bestelling: " + ex.Message);
                 }
             }
             else
