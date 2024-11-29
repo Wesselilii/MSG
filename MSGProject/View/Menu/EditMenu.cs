@@ -49,14 +49,14 @@ namespace MSGProject.View.Menu
             if (menu != null)
             {
                 // Debugging to check if the data is being loaded correctly
-                MessageBox.Show($"Menu Found: {menu.MenuNaam}, {menu.MenuBeschrijving}, {menu.MenuPrijs}", "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Menu Found: {menu.Menu_Naam}, {menu.Menu_Beschrijving}, {menu.Menu_Prijs}", "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // Setting textboxes values safely to handle possible null values
-                txtBox_Menu_Name.Text = menu.MenuNaam ?? string.Empty; // Use empty string if null
-                txtBox_Menu_Description.Text = menu.MenuBeschrijving ?? string.Empty; // Use empty string if null
-                txtBox_Menu_Price.Text = menu.MenuPrijs.ToString("F2"); // Formatting price to 2 decimal places
+                txtBox_Menu_Name.Text = menu.Menu_Naam ?? string.Empty; // Use empty string if null
+                txtBox_Menu_Description.Text = menu.Menu_Beschrijving ?? string.Empty; // Use empty string if null
+                txtBox_Menu_Price.Text = menu.Menu_Prijs.ToString("F2"); // Formatting price to 2 decimal places
 
-                if ((bool)menu.MenuBeschikbaar)
+                if ((bool)menu.Menu_Beschikbaar)
                 {
                     Menu_Status_Combobox.SelectedItem = "Ja";  // If MenuBeschikbaar is true, set to "Ja"
                 }
@@ -65,7 +65,7 @@ namespace MSGProject.View.Menu
                     Menu_Status_Combobox.SelectedItem = "Nee"; // If MenuBeschikbaar is false, set to "Nee"
                 }
 
-                Menu_Type_Combobox.SelectedItem = menu.MenuType;
+                Menu_Type_Combobox.SelectedItem = menu.Menu_Type;
             }
             else
             {
@@ -98,11 +98,11 @@ namespace MSGProject.View.Menu
                 bool isUpdated = MenuController.UpdateMenu(new MenuModel
                 {
                     MenuId = menuId.Value,
-                    MenuNaam = name,
-                    MenuBeschrijving = description,
-                    MenuPrijs = price,
-                    MenuType = menuType,
-                    MenuBeschikbaar = menuBeschikbaar
+                    Menu_Naam = name,
+                    Menu_Beschrijving = description,
+                    Menu_Prijs = price,
+                    Menu_Type = menuType,
+                    Menu_Beschikbaar = menuBeschikbaar
                 });
 
                 if (isUpdated)
@@ -120,11 +120,11 @@ namespace MSGProject.View.Menu
                 // Adding: Insert a new menu item
                 bool isAdded = MenuController.AddMenu(new MenuModel
                 {
-                    MenuNaam = name,
-                    MenuBeschrijving = description,
-                    MenuPrijs = price,
-                    MenuType = menuType,
-                    MenuBeschikbaar = menuBeschikbaar
+                    Menu_Naam = name,
+                    Menu_Beschrijving = description,
+                    Menu_Prijs = price,
+                    Menu_Type = menuType,
+                    Menu_Beschikbaar = menuBeschikbaar
                 });
 
                 if (isAdded)

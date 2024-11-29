@@ -1,5 +1,6 @@
 ﻿using MaterialSkin.Controls;
 using MSGProject.Controller;
+using MSGProject.Controllers;
 using MSGProject.Model;
 using MSGProject.View.Menu;
 using System;
@@ -25,19 +26,71 @@ namespace MSGProject
             materialSkinManager.EnforceBackcolorOnAllComponents = true;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
-            materialSkinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Indigo500, MaterialSkin.Primary.Indigo700, MaterialSkin.Primary.Indigo100, MaterialSkin.Accent.Pink200, MaterialSkin.TextShade.WHITE);
+            materialSkinManager.ColorScheme = new MaterialSkin.ColorScheme(
+                MaterialSkin.Primary.Indigo500,
+                MaterialSkin.Primary.Indigo700,
+                MaterialSkin.Primary.Indigo100,
+                MaterialSkin.Accent.Pink200,
+                MaterialSkin.TextShade.WHITE
+            );
         }
 
         // Harm --------------- Welcome User ----------------------------------------------------------------------------
-
         private void Dashboard_Load(object sender, EventArgs e)
         {
             // Display a welcome message
             Dashboard_Welcome_Label.Text = $"Welcome, {_currentUser.Gebruiker_Voornaam} {_currentUser.Gebruiker_Achternaam}!";
-        
+
             // Show or hide tabs based on user role
             UpdateTabsVisibility();
         }
+
+        private void UpdateTabsVisibility()
+        {
+            // Remove all tabs initially
+            List<TabPage> tabsToRemove = new List<TabPage>();
+            foreach (TabPage tabPage in materialTabControl1.TabPages)
+            {
+                tabsToRemove.Add(tabPage);
+            }
+            foreach (TabPage tabPage in tabsToRemove)
+            {
+                materialTabControl1.TabPages.Remove(tabPage);
+            }
+
+            // Add tabs based on the current user's role
+            switch (_currentUser.Gebruiker_Rol.ToLower())
+            {
+                case "klant":
+                    materialTabControl1.TabPages.Add(HomeTab);
+                    materialTabControl1.TabPages.Add(GBestellingenTab);
+                    Load_GBestellen();
+
+                    break;
+
+                case "chef":
+                    materialTabControl1.TabPages.Add(HomeTab);
+                    materialTabControl1.TabPages.Add(MaaltijdTab);
+                    Load_Menus();
+                    break;
+
+                case "administratie":
+                    materialTabControl1.TabPages.Add(HomeTab);
+                    materialTabControl1.TabPages.Add(GebruikersTab);
+                    materialTabControl1.TabPages.Add(MaaltijdTab);
+                    materialTabControl1.TabPages.Add(BestellingenTab);
+                    materialTabControl1.TabPages.Add(GBestellingenTab);
+                    Load_Bestellingen();
+                    Load_Menus();
+                    Load_GBestellen();
+                    break;
+
+                default:
+                    materialTabControl1.TabPages.Add(HomeTab); // Default tab for unrecognized roles
+                    break;
+            }
+        }
+
 
 
         // ---------------- BESTELLINGEN --- Gebruiker ---------------------------------------------------------------------------------
@@ -80,95 +133,24 @@ namespace MSGProject
 
                 // Retrieve the ID number from the MenuId Tag
                 int selectedMenuId = (int)selectedItem.Tag;
-                }
-        private void UpdateTabsVisibility()
-        {
-            // Remove all tabs initially
-            List<TabPage> tabsToRemove = new List<TabPage>();
-            foreach (TabPage tabPage in materialTabControl1.TabPages)
-            {
-                tabsToRemove.Add(tabPage);
-            }
-            foreach (TabPage tabPage in tabsToRemove)
-            {
-                materialTabControl1.TabPages.Remove(tabPage);
-            }
+
                 // Populate textboxes with visible data
                 BestelGTextbox1.Text = selectedItem.SubItems[0].Text;  // Menu_Naam
                 BestelGTextbox2.Text = selectedItem.SubItems[1].Text;  // Menu_Type
                 BestelGTextbox3.Text = selectedItem.SubItems[2].Text;  // Menu_Prijs
                 BestelGTextbox4.Text = selectedItem.SubItems[3].Text;  // Menu_Beschrijving
-            // Only proceed if the current user exists (meaning they're logged in)
-            // Add tabs based on the current user's role
-            switch (_currentUser.Gebruiker_Rol.ToLower())
-            {
-                case "klant":
-                    materialTabControl1.TabPages.Add(HomeTab);
-                    materialTabControl1.TabPages.Add(BestellingenTab);
-                    break;
 
-                case "chef":
-                    materialTabControl1.TabPages.Add(HomeTab);
-                    materialTabControl1.TabPages.Add(MaaltijdTab);
-                    materialTabControl1.TabPages.Add(BestellingenTab);
-                    break;
                 // Disable editing in textboxes
                 BestelGTextbox1.Enabled = false;
                 BestelGTextbox2.Enabled = false;
                 BestelGTextbox3.Enabled = false;
                 BestelGTextbox4.Enabled = false;
-        private void DisableAllTabsExceptHome()
-                case "administratie":
-                    materialTabControl1.TabPages.Add(HomeTab);
-                    materialTabControl1.TabPages.Add(GebruikersTab);
-                    materialTabControl1.TabPages.Add(MaaltijdTab);
-                    materialTabControl1.TabPages.Add(BestellingenTab);
-                    break;
 
-                default:
-                    materialTabControl1.TabPages.Add(HomeTab); // Default tab for unrecognized roles
-                    break;
-                }
+                Console.WriteLine($"Selected Menu ID: {selectedMenuId}");
             }
         }
 
         // ---------------- BESTELLINGEN --- Administratie -----------------------------------------------------------------------------
-        {
-            // Make sure all the necessary tabs are added back before role checks
-            if (!materialTabControl1.TabPages.Contains(HomeTab))
-            {
-                materialTabControl1.TabPages.Add(HomeTab);  // Add HomeTab back if it's missing
-            }
-        private void DisableAllTabsExceptHome()
-            // Add other tabs back if they were removed previously
-            if (!materialTabControl1.TabPages.Contains(BestellingenTab))
-            {
-                materialTabControl1.TabPages.Add(GebruikersTab);
-                materialTabControl1.TabPages.Add(MaaltijdTab);
-                materialTabControl1.TabPages.Add(BestellingenTab);
-                }
-            }
-        }
-
-    // ---------------- BESTELLINGEN --- Administratie -----------------------------------------------------------------------------
-        {
-            // Make sure all the necessary tabs are added back before role checks
-            if (!materialTabControl1.TabPages.Contains(HomeTab))
-            {
-                materialTabControl1.TabPages.Add(HomeTab);  // Add HomeTab back if it's missing
-            }
-
-            // Add other tabs back if they were removed previously
-            if (!materialTabControl1.TabPages.Contains(BestellingenTab))
-            {
-                materialTabControl1.TabPages.Add(GebruikersTab);
-                materialTabControl1.TabPages.Add(MaaltijdTab);
-                materialTabControl1.TabPages.Add(BestellingenTab);
-            }
-        }
-
-
-    // ---------------- BESTELLINGEN --- Administratie -----------------------------------------------------------------------------
         private void Load_Bestellingen()
         {
             try
@@ -339,6 +321,7 @@ namespace MSGProject
             }
         }
 
+        // Harm ----------- Menu loading ---------------------------
         private void Load_Menus()
         {
             // Clear existing items in the ListView
@@ -349,16 +332,18 @@ namespace MSGProject
             {
                 ListViewItem item = new ListViewItem(menu.MenuId.ToString());
 
-                item.SubItems.Add(menu.MenuNaam);
-                item.SubItems.Add(menu.MenuBeschrijving ?? ""); // Handle null description
-                item.SubItems.Add(menu.MenuType);
-                item.SubItems.Add(menu.MenuPrijs.ToString("C")); // Format price as currency
-                item.SubItems.Add(menu.MenuBeschikbaar.HasValue && menu.MenuBeschikbaar.Value ? "Yes" : "No");
+                item.SubItems.Add(menu.Menu_Naam);
+                item.SubItems.Add(menu.Menu_Beschrijving ?? ""); // Handle null description
+                item.SubItems.Add(menu.Menu_Type);
+                item.SubItems.Add(menu.Menu_Prijs.ToString("C")); // Format price as currency
+                item.SubItems.Add(menu.Menu_Beschikbaar.HasValue && menu.Menu_Beschikbaar.Value ? "Yes" : "No");
 
                 // Add the item to the ListView
                 Listview_Menu.Items.Add(item);
             }
         }
+
+        // Harm -------------------- Menu Deleting ---------------------
 
         private void Maaltijden_Form_Verwijderen_Btn_Click(object sender, EventArgs e)
         {
@@ -388,6 +373,8 @@ namespace MSGProject
                 }
             }
         }
+
+        // Harm -------------------- Menu Edit and show Form ---------------------
         private void Maaltijden_Form_Wijzigen_Btn_Click(object sender, EventArgs e)
         {
             // Check if an item is selected in ListView_Menu
@@ -408,6 +395,8 @@ namespace MSGProject
                 MessageBox.Show("Selecteer een maaltijd om te bewerken.", "Waarschuwing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        // Harm -------------------- Add Button to Show Form ---------------------
 
         private void Maaltijden_Form_Toevoegen_Btn_Click(object sender, EventArgs e)
         {

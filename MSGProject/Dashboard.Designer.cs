@@ -953,10 +953,6 @@
         private MaterialSkin.Controls.MaterialTextBox BestelATextbox4;
         private MaterialSkin.Controls.MaterialCard materialCard1;
         private MaterialSkin.Controls.MaterialLabel Dashboard_Welcome_Label;
-    }
-}
-
-
         private System.Windows.Forms.TabPage GBestellingenTab;
         private MaterialSkin.Controls.MaterialTextBox BestelGTextbox1;
         private MaterialSkin.Controls.MaterialLabel BestelGLabel1;
@@ -972,3 +968,8 @@
         private MaterialSkin.Controls.MaterialTextBox BestelGTextbox4;
         private MaterialSkin.Controls.MaterialTextBox BestelGTextbox3;
         private MaterialSkin.Controls.MaterialTextBox BestelGTextbox2;
+    }
+}
+
+
+

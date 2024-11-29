@@ -20,11 +20,11 @@ namespace MSGProject.Controller
                                      VALUES (@MenuNaam, @MenuBeschrijving, @MenuType, @MenuPrijs, @MenuBeschikbaar)";
 
                     MySqlCommand cmd = new MySqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@MenuNaam", menu.MenuNaam);
-                    cmd.Parameters.AddWithValue("@MenuBeschrijving", menu.MenuBeschrijving ?? (object)DBNull.Value); // Handle null descriptions
-                    cmd.Parameters.AddWithValue("@MenuType", menu.MenuType);
-                    cmd.Parameters.AddWithValue("@MenuPrijs", menu.MenuPrijs);
-                    cmd.Parameters.AddWithValue("@MenuBeschikbaar", menu.MenuBeschikbaar);
+                    cmd.Parameters.AddWithValue("@MenuNaam", menu.Menu_Naam);
+                    cmd.Parameters.AddWithValue("@MenuBeschrijving", menu.Menu_Beschrijving ?? (object)DBNull.Value); // Handle null descriptions
+                    cmd.Parameters.AddWithValue("@MenuType", menu.Menu_Type);
+                    cmd.Parameters.AddWithValue("@MenuPrijs", menu.Menu_Prijs);
+                    cmd.Parameters.AddWithValue("@MenuBeschikbaar", menu.Menu_Beschikbaar);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -76,11 +76,11 @@ namespace MSGProject.Controller
                                          Menu_Beschikbaar = @MenuBeschikbaar
                                      WHERE Menu_Id = @MenuId";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@MenuNaam", menu.MenuNaam);
-                    cmd.Parameters.AddWithValue("@MenuBeschrijving", menu.MenuBeschrijving ?? (object)DBNull.Value); // Handle null descriptions
-                    cmd.Parameters.AddWithValue("@MenuType", menu.MenuType);
-                    cmd.Parameters.AddWithValue("@MenuPrijs", menu.MenuPrijs);
-                    cmd.Parameters.AddWithValue("@MenuBeschikbaar", menu.MenuBeschikbaar);
+                    cmd.Parameters.AddWithValue("@MenuNaam", menu.Menu_Naam);
+                    cmd.Parameters.AddWithValue("@MenuBeschrijving", menu.Menu_Beschrijving ?? (object)DBNull.Value); // Handle null descriptions
+                    cmd.Parameters.AddWithValue("@MenuType", menu.Menu_Type);
+                    cmd.Parameters.AddWithValue("@MenuPrijs", menu.Menu_Prijs);
+                    cmd.Parameters.AddWithValue("@MenuBeschikbaar", menu.Menu_Beschikbaar);
                     cmd.Parameters.AddWithValue("@MenuId", menu.MenuId);
 
                     conn.Open();
@@ -116,11 +116,11 @@ namespace MSGProject.Controller
                         return new MenuModel
                         {
                             MenuId = reader.GetInt32("Menu_Id"),
-                            MenuNaam = reader.GetString("Menu_Naam"),
-                            MenuBeschrijving = reader.IsDBNull(reader.GetOrdinal("Menu_Beschrijving")) ? null : reader.GetString("Menu_Beschrijving"),
-                            MenuType = reader.GetString("Menu_Type"),
-                            MenuPrijs = reader.GetDecimal("Menu_Prijs"),
-                            MenuBeschikbaar = reader.GetBoolean("Menu_Beschikbaar")
+                            Menu_Naam = reader.GetString("Menu_Naam"),
+                            Menu_Beschrijving = reader.IsDBNull(reader.GetOrdinal("Menu_Beschrijving")) ? null : reader.GetString("Menu_Beschrijving"),
+                            Menu_Type = reader.GetString("Menu_Type"),
+                            Menu_Prijs = reader.GetDecimal("Menu_Prijs"),
+                            Menu_Beschikbaar = reader.GetBoolean("Menu_Beschikbaar")
                         };
                     }
                     else
@@ -155,11 +155,11 @@ namespace MSGProject.Controller
                         var menu = new MenuModel
                         {
                             MenuId = reader.GetInt32("Menu_Id"),
-                            MenuNaam = reader.GetString("Menu_Naam"),
-                            MenuBeschrijving = reader.IsDBNull(reader.GetOrdinal("Menu_Beschrijving")) ? null : reader.GetString("Menu_Beschrijving"),
-                            MenuType = reader.GetString("Menu_Type"),
-                            MenuPrijs = reader.GetDecimal("Menu_Prijs"),
-                            MenuBeschikbaar = reader.GetBoolean("Menu_Beschikbaar")
+                            Menu_Naam = reader.GetString("Menu_Naam"),
+                            Menu_Beschrijving = reader.IsDBNull(reader.GetOrdinal("Menu_Beschrijving")) ? null : reader.GetString("Menu_Beschrijving"),
+                            Menu_Type = reader.GetString("Menu_Type"),
+                            Menu_Prijs = reader.GetDecimal("Menu_Prijs"),
+                            Menu_Beschikbaar = reader.GetBoolean("Menu_Beschikbaar")
                         };
 
                         menuList.Add(menu);
