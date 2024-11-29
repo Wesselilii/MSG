@@ -86,7 +86,7 @@
             this.imageList1.Images.SetKeyName(3, "home-32.png");
             this.imageList1.Images.SetKeyName(4, "package-32.png");
             // 
-            // BestellingenTab
+            // BestellingenTab ---------------------------------------------------------------------------------------------------------------------
             // 
             this.BestellingenTab.Controls.Add(this.BestelATextbox4);
             this.BestellingenTab.Controls.Add(this.BestelADateTimePicker);
@@ -115,7 +115,7 @@
             // BestelADateTimePicker
             // 
             this.BestelADateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.BestelADateTimePicker.Location = new System.Drawing.Point(53, 262);
+            this.BestelADateTimePicker.Location = new System.Drawing.Point(26, 261);
             this.BestelADateTimePicker.MaxDate = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
             this.BestelADateTimePicker.MinDate = new System.DateTime(2024, 1, 1, 0, 0, 0, 0);
             this.BestelADateTimePicker.Name = "BestelADateTimePicker";
@@ -131,7 +131,7 @@
             this.BestelAButton3.Depth = 0;
             this.BestelAButton3.HighEmphasis = true;
             this.BestelAButton3.Icon = null;
-            this.BestelAButton3.Location = new System.Drawing.Point(178, 451);
+            this.BestelAButton3.Location = new System.Drawing.Point(151, 450);
             this.BestelAButton3.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.BestelAButton3.MouseState = MaterialSkin.MouseState.HOVER;
             this.BestelAButton3.Name = "BestelAButton3";
@@ -152,7 +152,7 @@
             this.BestelAButton2.Depth = 0;
             this.BestelAButton2.HighEmphasis = true;
             this.BestelAButton2.Icon = null;
-            this.BestelAButton2.Location = new System.Drawing.Point(57, 451);
+            this.BestelAButton2.Location = new System.Drawing.Point(30, 450);
             this.BestelAButton2.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.BestelAButton2.MouseState = MaterialSkin.MouseState.HOVER;
             this.BestelAButton2.Name = "BestelAButton2";
@@ -173,7 +173,7 @@
             this.BestelAButton1.Depth = 0;
             this.BestelAButton1.HighEmphasis = true;
             this.BestelAButton1.Icon = null;
-            this.BestelAButton1.Location = new System.Drawing.Point(57, 412);
+            this.BestelAButton1.Location = new System.Drawing.Point(30, 411);
             this.BestelAButton1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.BestelAButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.BestelAButton1.Name = "BestelAButton1";
@@ -263,7 +263,7 @@
             "Actief",
             "Geannuleerd",
             "Betaald"});
-            this.BestelACombobox1.Location = new System.Drawing.Point(57, 322);
+            this.BestelACombobox1.Location = new System.Drawing.Point(30, 321);
             this.BestelACombobox1.Margin = new System.Windows.Forms.Padding(2);
             this.BestelACombobox1.MaxDropDownItems = 4;
             this.BestelACombobox1.MouseState = MaterialSkin.MouseState.OUT;
@@ -273,6 +273,25 @@
             this.BestelACombobox1.TabIndex = 9;
             this.BestelACombobox1.UseTallSize = false;
             // 
+            // BestelATextbox4
+            // 
+            this.BestelATextbox4.AnimateReadOnly = false;
+            this.BestelATextbox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.BestelATextbox4.Depth = 0;
+            this.BestelATextbox4.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.BestelATextbox4.LeadingIcon = null;
+            this.BestelATextbox4.Location = new System.Drawing.Point(31, 183);
+            this.BestelATextbox4.Margin = new System.Windows.Forms.Padding(2);
+            this.BestelATextbox4.MaxLength = 50;
+            this.BestelATextbox4.MouseState = MaterialSkin.MouseState.OUT;
+            this.BestelATextbox4.Multiline = false;
+            this.BestelATextbox4.Name = "BestelATextbox4";
+            this.BestelATextbox4.Size = new System.Drawing.Size(229, 36);
+            this.BestelATextbox4.TabIndex = 15;
+            this.BestelATextbox4.Text = "";
+            this.BestelATextbox4.TrailingIcon = null;
+            this.BestelATextbox4.UseTallSize = false;
+            // 
             // BestelATextbox3
             // 
             this.BestelATextbox3.AnimateReadOnly = false;
@@ -280,7 +299,7 @@
             this.BestelATextbox3.Depth = 0;
             this.BestelATextbox3.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.BestelATextbox3.LeadingIcon = null;
-            this.BestelATextbox3.Location = new System.Drawing.Point(165, 108);
+            this.BestelATextbox3.Location = new System.Drawing.Point(138, 107);
             this.BestelATextbox3.Margin = new System.Windows.Forms.Padding(2);
             this.BestelATextbox3.MaxLength = 50;
             this.BestelATextbox3.MouseState = MaterialSkin.MouseState.OUT;
@@ -299,7 +318,7 @@
             this.BestelATextbox2.Depth = 0;
             this.BestelATextbox2.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.BestelATextbox2.LeadingIcon = null;
-            this.BestelATextbox2.Location = new System.Drawing.Point(57, 108);
+            this.BestelATextbox2.Location = new System.Drawing.Point(30, 107);
             this.BestelATextbox2.Margin = new System.Windows.Forms.Padding(2);
             this.BestelATextbox2.MaxLength = 50;
             this.BestelATextbox2.MouseState = MaterialSkin.MouseState.OUT;
@@ -318,7 +337,7 @@
             this.BestelATextbox1.Depth = 0;
             this.BestelATextbox1.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.BestelATextbox1.LeadingIcon = null;
-            this.BestelATextbox1.Location = new System.Drawing.Point(57, 37);
+            this.BestelATextbox1.Location = new System.Drawing.Point(30, 36);
             this.BestelATextbox1.Margin = new System.Windows.Forms.Padding(2);
             this.BestelATextbox1.MaxLength = 50;
             this.BestelATextbox1.MouseState = MaterialSkin.MouseState.OUT;
@@ -335,7 +354,7 @@
             this.BestelALabel5.AutoSize = true;
             this.BestelALabel5.Depth = 0;
             this.BestelALabel5.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.BestelALabel5.Location = new System.Drawing.Point(55, 301);
+            this.BestelALabel5.Location = new System.Drawing.Point(28, 300);
             this.BestelALabel5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.BestelALabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.BestelALabel5.Name = "BestelALabel5";
@@ -348,7 +367,7 @@
             this.BestelALabel4.AutoSize = true;
             this.BestelALabel4.Depth = 0;
             this.BestelALabel4.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.BestelALabel4.Location = new System.Drawing.Point(55, 240);
+            this.BestelALabel4.Location = new System.Drawing.Point(28, 239);
             this.BestelALabel4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.BestelALabel4.MouseState = MaterialSkin.MouseState.HOVER;
             this.BestelALabel4.Name = "BestelALabel4";
@@ -361,7 +380,7 @@
             this.BestelALabel3.AutoSize = true;
             this.BestelALabel3.Depth = 0;
             this.BestelALabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.BestelALabel3.Location = new System.Drawing.Point(55, 163);
+            this.BestelALabel3.Location = new System.Drawing.Point(28, 162);
             this.BestelALabel3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.BestelALabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.BestelALabel3.Name = "BestelALabel3";
@@ -374,7 +393,7 @@
             this.BestelALabel2.AutoSize = true;
             this.BestelALabel2.Depth = 0;
             this.BestelALabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.BestelALabel2.Location = new System.Drawing.Point(55, 90);
+            this.BestelALabel2.Location = new System.Drawing.Point(28, 89);
             this.BestelALabel2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.BestelALabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.BestelALabel2.Name = "BestelALabel2";
@@ -387,7 +406,7 @@
             this.BestelALabel1.AutoSize = true;
             this.BestelALabel1.Depth = 0;
             this.BestelALabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.BestelALabel1.Location = new System.Drawing.Point(55, 19);
+            this.BestelALabel1.Location = new System.Drawing.Point(28, 18);
             this.BestelALabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.BestelALabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.BestelALabel1.Name = "BestelALabel1";
@@ -395,7 +414,7 @@
             this.BestelALabel1.TabIndex = 0;
             this.BestelALabel1.Text = "Bestellings Nummer";
             // 
-            // MaaltijdTab
+            // MaaltijdTab ----------------------------------------------------------------------------------------------------------------------
             // 
             this.MaaltijdTab.ImageKey = "rice-32.png";
             this.MaaltijdTab.Location = new System.Drawing.Point(4, 39);
@@ -407,7 +426,7 @@
             this.MaaltijdTab.Text = "Maaltijden";
             this.MaaltijdTab.UseVisualStyleBackColor = true;
             // 
-            // GebruikersTab
+            // GebruikersTab --------------------------------------------------------------------------------------------------------------------
             // 
             this.GebruikersTab.ImageKey = "user-32.png";
             this.GebruikersTab.Location = new System.Drawing.Point(4, 39);
@@ -419,7 +438,7 @@
             this.GebruikersTab.Text = "Gebruikers";
             this.GebruikersTab.UseVisualStyleBackColor = true;
             // 
-            // HomeTab
+            // HomeTab --------------------------------------------------------------------------------------------------------------------------
             // 
             this.HomeTab.ImageKey = "home-32.png";
             this.HomeTab.Location = new System.Drawing.Point(4, 39);
@@ -449,7 +468,7 @@
             this.materialTabControl1.Size = new System.Drawing.Size(994, 556);
             this.materialTabControl1.TabIndex = 0;
             // 
-            // GBestellingenTab
+            // GBestellingenTab ---------------------------------------------------------------------------------------------------------------
             // 
             this.GBestellingenTab.Controls.Add(this.BestelGTextbox4);
             this.GBestellingenTab.Controls.Add(this.BestelGTextbox3);
@@ -476,7 +495,7 @@
             this.BestelGTextbox4.Depth = 0;
             this.BestelGTextbox4.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.BestelGTextbox4.LeadingIcon = null;
-            this.BestelGTextbox4.Location = new System.Drawing.Point(63, 262);
+            this.BestelGTextbox4.Location = new System.Drawing.Point(33, 262);
             this.BestelGTextbox4.MaxLength = 50;
             this.BestelGTextbox4.MouseState = MaterialSkin.MouseState.OUT;
             this.BestelGTextbox4.Multiline = false;
@@ -494,7 +513,7 @@
             this.BestelGTextbox3.Depth = 0;
             this.BestelGTextbox3.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.BestelGTextbox3.LeadingIcon = null;
-            this.BestelGTextbox3.Location = new System.Drawing.Point(63, 190);
+            this.BestelGTextbox3.Location = new System.Drawing.Point(33, 190);
             this.BestelGTextbox3.MaxLength = 50;
             this.BestelGTextbox3.MouseState = MaterialSkin.MouseState.OUT;
             this.BestelGTextbox3.Multiline = false;
@@ -512,7 +531,7 @@
             this.BestelGTextbox2.Depth = 0;
             this.BestelGTextbox2.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.BestelGTextbox2.LeadingIcon = null;
-            this.BestelGTextbox2.Location = new System.Drawing.Point(63, 117);
+            this.BestelGTextbox2.Location = new System.Drawing.Point(33, 117);
             this.BestelGTextbox2.MaxLength = 50;
             this.BestelGTextbox2.MouseState = MaterialSkin.MouseState.OUT;
             this.BestelGTextbox2.Multiline = false;
@@ -523,12 +542,30 @@
             this.BestelGTextbox2.TrailingIcon = null;
             this.BestelGTextbox2.UseTallSize = false;
             // 
+            // BestelGTextbox1
+            // 
+            this.BestelGTextbox1.AnimateReadOnly = false;
+            this.BestelGTextbox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.BestelGTextbox1.Depth = 0;
+            this.BestelGTextbox1.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.BestelGTextbox1.LeadingIcon = null;
+            this.BestelGTextbox1.Location = new System.Drawing.Point(33, 42);
+            this.BestelGTextbox1.MaxLength = 50;
+            this.BestelGTextbox1.MouseState = MaterialSkin.MouseState.OUT;
+            this.BestelGTextbox1.Multiline = false;
+            this.BestelGTextbox1.Name = "BestelGTextbox1";
+            this.BestelGTextbox1.Size = new System.Drawing.Size(234, 36);
+            this.BestelGTextbox1.TabIndex = 1;
+            this.BestelGTextbox1.Text = "";
+            this.BestelGTextbox1.TrailingIcon = null;
+            this.BestelGTextbox1.UseTallSize = false;
+            // 
             // BestelGLabel4
             // 
             this.BestelGLabel4.AutoSize = true;
             this.BestelGLabel4.Depth = 0;
             this.BestelGLabel4.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.BestelGLabel4.Location = new System.Drawing.Point(60, 240);
+            this.BestelGLabel4.Location = new System.Drawing.Point(30, 240);
             this.BestelGLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             this.BestelGLabel4.Name = "BestelGLabel4";
             this.BestelGLabel4.Size = new System.Drawing.Size(87, 19);
@@ -540,7 +577,7 @@
             this.BestelGLabel3.AutoSize = true;
             this.BestelGLabel3.Depth = 0;
             this.BestelGLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.BestelGLabel3.Location = new System.Drawing.Point(60, 168);
+            this.BestelGLabel3.Location = new System.Drawing.Point(30, 168);
             this.BestelGLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.BestelGLabel3.Name = "BestelGLabel3";
             this.BestelGLabel3.Size = new System.Drawing.Size(32, 19);
@@ -552,7 +589,7 @@
             this.BestelGLabel2.AutoSize = true;
             this.BestelGLabel2.Depth = 0;
             this.BestelGLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.BestelGLabel2.Location = new System.Drawing.Point(60, 95);
+            this.BestelGLabel2.Location = new System.Drawing.Point(30, 95);
             this.BestelGLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.BestelGLabel2.Name = "BestelGLabel2";
             this.BestelGLabel2.Size = new System.Drawing.Size(36, 19);
@@ -561,6 +598,9 @@
             // 
             // BestelGListView1
             // 
+            this.BestelGListView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.BestelGListView1.AutoSizeTable = false;
             this.BestelGListView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BestelGListView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -578,7 +618,7 @@
             this.BestelGListView1.MouseState = MaterialSkin.MouseState.OUT;
             this.BestelGListView1.Name = "BestelGListView1";
             this.BestelGListView1.OwnerDraw = true;
-            this.BestelGListView1.Size = new System.Drawing.Size(620, 453);
+            this.BestelGListView1.Size = new System.Drawing.Size(670, 480);
             this.BestelGListView1.TabIndex = 3;
             this.BestelGListView1.UseCompatibleStateImageBehavior = false;
             this.BestelGListView1.View = System.Windows.Forms.View.Details;
@@ -612,7 +652,7 @@
             this.BestelGButton1.Depth = 0;
             this.BestelGButton1.HighEmphasis = true;
             this.BestelGButton1.Icon = null;
-            this.BestelGButton1.Location = new System.Drawing.Point(62, 370);
+            this.BestelGButton1.Location = new System.Drawing.Point(32, 370);
             this.BestelGButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.BestelGButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.BestelGButton1.Name = "BestelGButton1";
@@ -629,7 +669,7 @@
             this.BestelGLabel1.AutoSize = true;
             this.BestelGLabel1.Depth = 0;
             this.BestelGLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.BestelGLabel1.Location = new System.Drawing.Point(60, 20);
+            this.BestelGLabel1.Location = new System.Drawing.Point(30, 20);
             this.BestelGLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.BestelGLabel1.Name = "BestelGLabel1";
             this.BestelGLabel1.Size = new System.Drawing.Size(41, 19);

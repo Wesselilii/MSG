@@ -39,18 +39,15 @@ namespace MSGProject
                 // Get the menu items using the controller
                 List<MenuModel> menuList = BestellenController.GetBestellen();
 
-                // Loop through the list and add items to the ListView
+                // Add items to the ListView
                 foreach (var menu in menuList)
                 {
-                    // Create a ListView item, using Menu_Naam as the first visible column
                     var item = new ListViewItem(menu.Menu_Naam);
-
-                    // Add the remaining subitems (Type, Prijs, Beschrijving)
                     item.SubItems.Add(menu.Menu_Type);
-                    item.SubItems.Add(menu.Menu_Prijs.ToString("C"));  // Format the price as currency
+                    item.SubItems.Add(menu.Menu_Prijs.ToString("C"));
                     item.SubItems.Add(menu.Menu_Beschrijving);
 
-                    // Store the MenuId in the Tag property (not visible to the user)
+                    // Store the MenuId
                     item.Tag = menu.MenuId;
 
                     // Add the item to the ListView
@@ -59,7 +56,6 @@ namespace MSGProject
             }
             catch (Exception ex)
             {
-                // Show an error message if something goes wrong
                 MessageBox.Show("error bij het laden van deze pagina: " + ex.Message);
             }
         }
@@ -70,7 +66,7 @@ namespace MSGProject
             {
                 var selectedItem = BestelGListView1.SelectedItems[0];
 
-                // Retrieve the ID from the Tag
+                // Retrieve the ID number from the MenuId Tag
                 int selectedMenuId = (int)selectedItem.Tag;
 
                 // Populate textboxes with visible data
@@ -97,7 +93,7 @@ namespace MSGProject
                 // Clear existing items in the ListView
                 BestelAListView1.Items.Clear();
 
-                // get the controller data
+                // Get the controller data
                 var bestellingController = new BestellingenController();
                 var bestellingen = bestellingController.GetBestellingen();
 
@@ -106,7 +102,6 @@ namespace MSGProject
                     // Combine First Name and Last Name for display in the ListView
                     string fullName = $"{bestelling.Gebruiker_Voornaam} {bestelling.Gebruiker_Achternaam}";
                     var item = new ListViewItem(bestelling.Bestelling_Id.ToString());
-
                     item.SubItems.Add(fullName);
                     item.SubItems.Add(bestelling.Menu_Id.ToString());
                     item.SubItems.Add(bestelling.Bestelling_Datum.ToString("yyyy-MM-dd"));
@@ -204,13 +199,13 @@ namespace MSGProject
                     Bestelling_Status = status
                 };
 
-                // Add the order via the controller
+                // Add the Bestelling via the controller
                 controller.AddBestelling(newBestelling);
                 Load_Bestellingen();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Fout met het toevoegen van order: " + ex.Message);
+                MessageBox.Show("Fout met het toevoegen van een bestelling: " + ex.Message);
             }
         }
 
@@ -222,19 +217,17 @@ namespace MSGProject
             {
                 try
                 {
-                    // Retrieve the selected order's ID from the Tag property
+                    // Retrieve the selected Bestelling ID from the Tag Bestelling_Id
                     int bestellingId = (int)BestelAListView1.SelectedItems[0].Tag;
 
-                    // Delete the order via the controller
+                    // Delete the Bestelling via the controller
                     var controller = new BestellingenController();
                     controller.DeleteBestelling(bestellingId);
-
-                    // Reload the ListView to reflect changes
                     Load_Bestellingen();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Fout bij het verwijderen van gebruiker: " + ex.Message);
+                    MessageBox.Show("Fout bij het verwijderen van een bestelling: " + ex.Message);
                 }
             }
             else
