@@ -55,9 +55,6 @@
             this.MaaltijdTab = new System.Windows.Forms.TabPage();
             this.GebruikersTab = new System.Windows.Forms.TabPage();
             this.HomeTab = new System.Windows.Forms.TabPage();
-            this.HomeLButton1 = new MaterialSkin.Controls.MaterialButton();
-            this.HomeLTextBox2 = new MaterialSkin.Controls.MaterialTextBox();
-            this.HomeLTextBox1 = new MaterialSkin.Controls.MaterialTextBox();
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
             this.GBestellingenTab = new System.Windows.Forms.TabPage();
             this.BestelGTextbox4 = new MaterialSkin.Controls.MaterialTextBox();
@@ -75,7 +72,6 @@
             this.BestelGTextbox1 = new MaterialSkin.Controls.MaterialTextBox();
             this.BestelGLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.BestellingenTab.SuspendLayout();
-            this.HomeTab.SuspendLayout();
             this.materialTabControl1.SuspendLayout();
             this.GBestellingenTab.SuspendLayout();
             this.SuspendLayout();
@@ -115,25 +111,6 @@
             this.BestellingenTab.TabIndex = 2;
             this.BestellingenTab.Text = "Bestellingen";
             this.BestellingenTab.UseVisualStyleBackColor = true;
-            // 
-            // BestelATextbox4
-            // 
-            this.BestelATextbox4.AnimateReadOnly = false;
-            this.BestelATextbox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.BestelATextbox4.Depth = 0;
-            this.BestelATextbox4.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.BestelATextbox4.LeadingIcon = null;
-            this.BestelATextbox4.Location = new System.Drawing.Point(58, 184);
-            this.BestelATextbox4.Margin = new System.Windows.Forms.Padding(2);
-            this.BestelATextbox4.MaxLength = 50;
-            this.BestelATextbox4.MouseState = MaterialSkin.MouseState.OUT;
-            this.BestelATextbox4.Multiline = false;
-            this.BestelATextbox4.Name = "BestelATextbox4";
-            this.BestelATextbox4.Size = new System.Drawing.Size(229, 36);
-            this.BestelATextbox4.TabIndex = 15;
-            this.BestelATextbox4.Text = "";
-            this.BestelATextbox4.TrailingIcon = null;
-            this.BestelATextbox4.UseTallSize = false;
             // 
             // BestelADateTimePicker
             // 
@@ -444,9 +421,6 @@
             // 
             // HomeTab
             // 
-            this.HomeTab.Controls.Add(this.HomeLButton1);
-            this.HomeTab.Controls.Add(this.HomeLTextBox2);
-            this.HomeTab.Controls.Add(this.HomeLTextBox1);
             this.HomeTab.ImageKey = "home-32.png";
             this.HomeTab.Location = new System.Drawing.Point(4, 39);
             this.HomeTab.Margin = new System.Windows.Forms.Padding(2);
@@ -455,62 +429,6 @@
             this.HomeTab.TabIndex = 3;
             this.HomeTab.Text = "Home";
             this.HomeTab.UseVisualStyleBackColor = true;
-            // 
-            // HomeLButton1
-            // 
-            this.HomeLButton1.AutoSize = false;
-            this.HomeLButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.HomeLButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.HomeLButton1.Depth = 0;
-            this.HomeLButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.HomeLButton1.HighEmphasis = true;
-            this.HomeLButton1.Icon = null;
-            this.HomeLButton1.Location = new System.Drawing.Point(345, 275);
-            this.HomeLButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.HomeLButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.HomeLButton1.Name = "HomeLButton1";
-            this.HomeLButton1.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.HomeLButton1.Size = new System.Drawing.Size(262, 39);
-            this.HomeLButton1.TabIndex = 2;
-            this.HomeLButton1.Text = "Login";
-            this.HomeLButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.HomeLButton1.UseAccentColor = false;
-            this.HomeLButton1.UseVisualStyleBackColor = true;
-            // 
-            // HomeLTextBox2
-            // 
-            this.HomeLTextBox2.AnimateReadOnly = false;
-            this.HomeLTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.HomeLTextBox2.Depth = 0;
-            this.HomeLTextBox2.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.HomeLTextBox2.LeadingIcon = null;
-            this.HomeLTextBox2.Location = new System.Drawing.Point(345, 193);
-            this.HomeLTextBox2.MaxLength = 50;
-            this.HomeLTextBox2.MouseState = MaterialSkin.MouseState.OUT;
-            this.HomeLTextBox2.Multiline = false;
-            this.HomeLTextBox2.Name = "HomeLTextBox2";
-            this.HomeLTextBox2.Password = true;
-            this.HomeLTextBox2.Size = new System.Drawing.Size(262, 50);
-            this.HomeLTextBox2.TabIndex = 1;
-            this.HomeLTextBox2.Text = "";
-            this.HomeLTextBox2.TrailingIcon = null;
-            // 
-            // HomeLTextBox1
-            // 
-            this.HomeLTextBox1.AnimateReadOnly = false;
-            this.HomeLTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.HomeLTextBox1.Depth = 0;
-            this.HomeLTextBox1.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.HomeLTextBox1.LeadingIcon = null;
-            this.HomeLTextBox1.Location = new System.Drawing.Point(345, 137);
-            this.HomeLTextBox1.MaxLength = 50;
-            this.HomeLTextBox1.MouseState = MaterialSkin.MouseState.OUT;
-            this.HomeLTextBox1.Multiline = false;
-            this.HomeLTextBox1.Name = "HomeLTextBox1";
-            this.HomeLTextBox1.Size = new System.Drawing.Size(262, 50);
-            this.HomeLTextBox1.TabIndex = 0;
-            this.HomeLTextBox1.Text = "";
-            this.HomeLTextBox1.TrailingIcon = null;
             // 
             // materialTabControl1
             // 
@@ -706,24 +624,6 @@
             this.BestelGButton1.UseAccentColor = false;
             this.BestelGButton1.UseVisualStyleBackColor = true;
             // 
-            // BestelGTextbox1
-            // 
-            this.BestelGTextbox1.AnimateReadOnly = false;
-            this.BestelGTextbox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.BestelGTextbox1.Depth = 0;
-            this.BestelGTextbox1.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.BestelGTextbox1.LeadingIcon = null;
-            this.BestelGTextbox1.Location = new System.Drawing.Point(63, 42);
-            this.BestelGTextbox1.MaxLength = 50;
-            this.BestelGTextbox1.MouseState = MaterialSkin.MouseState.OUT;
-            this.BestelGTextbox1.Multiline = false;
-            this.BestelGTextbox1.Name = "BestelGTextbox1";
-            this.BestelGTextbox1.Size = new System.Drawing.Size(234, 36);
-            this.BestelGTextbox1.TabIndex = 1;
-            this.BestelGTextbox1.Text = "";
-            this.BestelGTextbox1.TrailingIcon = null;
-            this.BestelGTextbox1.UseTallSize = false;
-            // 
             // BestelGLabel1
             // 
             this.BestelGLabel1.AutoSize = true;
@@ -751,7 +651,6 @@
             this.Load += new System.EventHandler(this.Dashboard_Load);
             this.BestellingenTab.ResumeLayout(false);
             this.BestellingenTab.PerformLayout();
-            this.HomeTab.ResumeLayout(false);
             this.materialTabControl1.ResumeLayout(false);
             this.GBestellingenTab.ResumeLayout(false);
             this.GBestellingenTab.PerformLayout();
@@ -786,9 +685,6 @@
         private MaterialSkin.Controls.MaterialTabControl materialTabControl1;
         private System.Windows.Forms.DateTimePicker BestelADateTimePicker;
         private MaterialSkin.Controls.MaterialTextBox BestelATextbox4;
-        private MaterialSkin.Controls.MaterialTextBox HomeLTextBox1;
-        private MaterialSkin.Controls.MaterialButton HomeLButton1;
-        private MaterialSkin.Controls.MaterialTextBox HomeLTextBox2;
         private System.Windows.Forms.TabPage GBestellingenTab;
         private MaterialSkin.Controls.MaterialTextBox BestelGTextbox1;
         private MaterialSkin.Controls.MaterialLabel BestelGLabel1;
