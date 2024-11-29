@@ -12,114 +12,81 @@ namespace MSGProject
     public partial class Dashboard : MaterialForm
     {
         readonly MaterialSkin.MaterialSkinManager materialSkinManager;
-        private GebruikerModel _currentUser;
-        public Dashboard()
+        private readonly GebruikerModel _currentUser;
+
+        // Constructor accepting GebruikerModel
+        public Dashboard(GebruikerModel currentUser)
         {
             InitializeComponent();
+            _currentUser = currentUser;
+
+            // Initialize MaterialSkinManager
             materialSkinManager = MaterialSkin.MaterialSkinManager.Instance;
             materialSkinManager.EnforceBackcolorOnAllComponents = true;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
-            materialSkinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Indigo500, MaterialSkin.Primary.Indigo700, MaterialSkin.Primary.Indigo100, MaterialSkin.Accent.Pink200, MaterialSkin.TextShade.WHITE);
+            materialSkinManager.ColorScheme = new MaterialSkin.ColorScheme(
+                MaterialSkin.Primary.Indigo500,
+                MaterialSkin.Primary.Indigo700,
+                MaterialSkin.Primary.Indigo100,
+                MaterialSkin.Accent.Pink200,
+                MaterialSkin.TextShade.WHITE
+            );
         }
+
+        // Harm --------------- Welcome User ----------------------------------------------------------------------------
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
-            // If no user is logged in, show only the HomeTab and disable all other tabs
-            if (_currentUser == null)
-            {
-                DisableAllTabsExceptHome();
-            }
-            else
-            {
-                Load_RoleChecker();
-            }
-            Load_Bestellingen();
+            // Display a welcome message
+            Dashboard_Welcome_Label.Text = $"Welcome, {_currentUser.Gebruiker_Voornaam} {_currentUser.Gebruiker_Achternaam}!";
+
+            // Show or hide tabs based on user role
+            UpdateTabsVisibility();
         }
 
-        // ---------------- LOGIN ------------------------------------------------------------------------------------------------------
-        private void HomeLButton1_Click(object sender, EventArgs e)
+        private void UpdateTabsVisibility()
         {
-            try
-            {
-                string email = HomeLTextBox1.Text;
-                string password = HomeLTextBox2.Text;
-
-                // Authenticate user via LoginController
-                var loginController = new LoginController();
-                var user = loginController.AuthenticateUser(email, password);
-
-                if (user != null)
-                {
-                    MessageBox.Show($"Welkom, {user.Gebruiker_Voornaam} {user.Gebruiker_Achternaam}!");
-
-                    // Store the authenticated user in the _currentUser variable
-                    _currentUser = user;
-
-                    // Check if the user is an admin and handle tab visibility accordingly
-                    if (user.Gebruiker_Rol == "Admin")
-                    {
-
-                        BestellingenTab.Enabled = true; // Admin can access Bestellingen
-                    }
-                    else
-                    {
-                        BestellingenTab.Enabled = false; // Non-admins cannot access Bestellingen
-                    }
-                    Load_RoleChecker();
-                }
-                else
-                {
-                    MessageBox.Show("Ongeldige Email of Wachtwoord.");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error bij het inloggen: {ex.Message}");
-            }
-        }
-
-        // ---------------- ROLE CHECKER ---------------------------------------
-        private void Load_RoleChecker()
-        {
-            // Only proceed if the current user exists (meaning they're logged in)
-            if (_currentUser != null && _currentUser.Gebruiker_Rol != "Admin")
-            {
-                // If the user is not an admin, remove the Bestellingen tab from the tabs list
-                materialTabControl1.TabPages.Remove(BestellingenTab);
-            }
-        }
-
-        private void DisableAllTabsExceptHome()
-        {
+            // Remove all tabs initially
+            List<TabPage> tabsToRemove = new List<TabPage>();
             foreach (TabPage tabPage in materialTabControl1.TabPages)
             {
-                if (tabPage != HomeTab)
-                {
-                    materialTabControl1.TabPages.Remove(tabPage);
-                }
+                tabsToRemove.Add(tabPage);
+            }
+            foreach (TabPage tabPage in tabsToRemove)
+            {
+                materialTabControl1.TabPages.Remove(tabPage);
+            }
+
+            // Add tabs based on the current user's role
+            switch (_currentUser.Gebruiker_Rol.ToLower())
+            {
+                case "klant":
+                    materialTabControl1.TabPages.Add(HomeTab);
+                    materialTabControl1.TabPages.Add(BestellingenTab);
+                    break;
+
+                case "chef":
+                    materialTabControl1.TabPages.Add(HomeTab);
+                    materialTabControl1.TabPages.Add(MaaltijdTab);
+                    materialTabControl1.TabPages.Add(BestellingenTab);
+                    break;
+
+                case "administratie":
+                    materialTabControl1.TabPages.Add(HomeTab);
+                    materialTabControl1.TabPages.Add(GebruikersTab);
+                    materialTabControl1.TabPages.Add(MaaltijdTab);
+                    materialTabControl1.TabPages.Add(BestellingenTab);
+                    break;
+
+                default:
+                    materialTabControl1.TabPages.Add(HomeTab); // Default tab for unrecognized roles
+                    break;
             }
         }
 
-        private void RestoreTabs()
-        {
-            // Make sure all the necessary tabs are added back before role checks
-            if (!materialTabControl1.TabPages.Contains(HomeTab))
-            {
-                materialTabControl1.TabPages.Add(HomeTab);  // Add HomeTab back if it's missing
-            }
 
-            // Add other tabs back if they were removed previously
-            if (!materialTabControl1.TabPages.Contains(BestellingenTab))
-            {
-                materialTabControl1.TabPages.Add(GebruikersTab);
-                materialTabControl1.TabPages.Add(MaaltijdTab);
-                materialTabControl1.TabPages.Add(BestellingenTab);
-            }
-        }
-
-
-    // ---------------- BESTELLINGEN --- Administratie -----------------------------------------------------------------------------
+        // ---------------- BESTELLINGEN --- Administratie -----------------------------------------------------------------------------
         private void Load_Bestellingen()
         {
             try

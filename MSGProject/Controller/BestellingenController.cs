@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using MSGProject.Model;
 using MySql.Data.MySqlClient;
 
-namespace MSGProject.Controllers
+namespace MSGProject.Controller
 {
     internal class BestellingenController
     {
