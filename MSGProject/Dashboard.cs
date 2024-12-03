@@ -89,9 +89,7 @@ namespace MSGProject
             }
         }
 
-
-
-        // ---------------- BESTELLINGEN --- Gebruiker ---------------------------------------------------------------------------------
+        // Wesley ---------------- BESTELLINGEN --- Gebruiker ---------------------------------------------------------------------------------
         private void Load_GBestellen()
         {
             try
@@ -148,7 +146,7 @@ namespace MSGProject
             }
         }
 
-        // ---------------- BESTELLINGEN --- Administratie -----------------------------------------------------------------------------
+        // Wesley ---------------- BESTELLINGEN --- Administratie -----------------------------------------------------------------------------
         private void Load_Bestellingen()
         {
             try
@@ -183,7 +181,7 @@ namespace MSGProject
             }
         }
 
-        // -------- Aanpassen button ---------
+        // -------- BESTELLINGEN Aanpassen button ---------
         private void BestelAButton1_Click(object sender, EventArgs e)
         {
             // Ensure an item is selected in the ListView
@@ -228,7 +226,7 @@ namespace MSGProject
             }
         }
 
-        // -------- Toevoegen button ---------
+        // -------- BESTELLINGEN Toevoegen button ---------
         private void BestelAButton2_Click(object sender, EventArgs e)
         {
             try
@@ -272,7 +270,7 @@ namespace MSGProject
             }
         }
 
-        // -------- Verwijderen button ---------
+        // -------- BESTELLINGEN Verwijderen button ---------
         private void BestelAButton3_Click(object sender, EventArgs e)
         {
             // Ensure an item is selected in the ListView
