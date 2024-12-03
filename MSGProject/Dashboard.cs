@@ -79,10 +79,8 @@ namespace MSGProject
                     materialTabControl1.TabPages.Add(GebruikersTab);
                     materialTabControl1.TabPages.Add(MaaltijdTab);
                     materialTabControl1.TabPages.Add(BestellingenTab);
-                    materialTabControl1.TabPages.Add(GBestellingenTab);
                     Load_Bestellingen();
                     Load_Menus();
-                    Load_GBestellen();
                     break;
 
                 default:
