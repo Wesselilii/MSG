@@ -52,17 +52,21 @@ namespace MSGProject.View.Login
 
                 if (user != null)
                 {
+                    // Clear input fields
                     Login_Email_TextBox.Clear();
                     Login_Password_Textbox.Clear();
+
                     // Authentication successful, open Dashboard
-                    Dashboard dashboard = new Dashboard(user); // Pass user to Dashboard
+                    Dashboard dashboard = new Dashboard(user); // Pass authenticated user to Dashboard
                     dashboard.Show();
-                    this.Hide(); // Close the login form
+
+                    // Hide the current form
+                    this.Hide();
                 }
                 else
                 {
                     // Authentication failed
-                    MessageBox.Show("Foute email of password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Foute email of wachtwoord.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
@@ -71,6 +75,7 @@ namespace MSGProject.View.Login
                 MessageBox.Show($"Fout: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void MaterialLabel1_Click(object sender, EventArgs e)
         {

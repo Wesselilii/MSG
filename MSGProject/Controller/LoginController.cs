@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Data.SqlClient;
-using System.Security.Cryptography;
-using System.Windows.Forms;
 using MSGProject.Model;
 using MySql.Data.MySqlClient;
+using BCrypt.Net;
+using System.Windows.Forms; // Import BCrypt library
 
 namespace MSGProject.Controller
 {
@@ -17,28 +15,38 @@ namespace MSGProject.Controller
         {
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
-                string query = "SELECT * FROM Gebruikers WHERE Gebruiker_Email = @Email AND Gebruiker_Wachtwoord = @Password";
+                // Query to retrieve the user by email
+                string query = "SELECT Gebruiker_Id, Gebruiker_Voornaam, Gebruiker_Achternaam, Gebruiker_Email, Gebruiker_Wachtwoord, Gebruiker_Rol " +
+                               "FROM Gebruikers WHERE Gebruiker_Email = @Email";
+
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Email", email);
-                command.Parameters.AddWithValue("@Password", password); // Assume passwords are hashed in production!
 
                 connection.Open();
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
                     if (reader.Read())
                     {
-                        return new GebruikerModel
+                        string storedHashedPassword = reader.GetString(reader.GetOrdinal("Gebruiker_Wachtwoord"));
+
+                        // Verify the password using bcrypt
+                        if (BCrypt.Net.BCrypt.EnhancedVerify(password, storedHashedPassword))
                         {
-                            Gebruiker_Id = reader.GetInt32("Gebruiker_Id"),
-                            Gebruiker_Voornaam = reader.GetString("Gebruiker_Voornaam"),
-                            Gebruiker_Achternaam = reader.GetString("Gebruiker_Achternaam"),
-                            Gebruiker_Email = reader.GetString("Gebruiker_Email"),
-                            Gebruiker_Wachtwoord = reader.GetString("Gebruiker_Wachtwoord"),
-                            Gebruiker_Rol = reader.GetString("Gebruiker_Rol")
-                        };
+                            // Return the user model if the password matches
+                            return new GebruikerModel
+                            {
+                                Gebruiker_Id = reader.GetInt32(reader.GetOrdinal("Gebruiker_Id")),
+                                Gebruiker_Voornaam = reader.GetString(reader.GetOrdinal("Gebruiker_Voornaam")),
+                                Gebruiker_Achternaam = reader.GetString(reader.GetOrdinal("Gebruiker_Achternaam")),
+                                Gebruiker_Email = reader.GetString(reader.GetOrdinal("Gebruiker_Email")),
+                                Gebruiker_Wachtwoord = storedHashedPassword,
+                                Gebruiker_Rol = reader.GetString(reader.GetOrdinal("Gebruiker_Rol"))
+                            };
+                        }
                     }
                 }
             }
+            // Return null if authentication fails
             return null;
         }
     }

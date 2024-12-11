@@ -43,7 +43,7 @@ namespace MSGProject.View.Startup
                 gebruikersController.GebruikersCreate(gebruikersModel);
 
                 MessageBox.Show("Succesvol geregistreerd!");
-                this.Close();
+                this.Hide();
             }
             catch (Exception ex)
             {
