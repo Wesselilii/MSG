@@ -84,6 +84,7 @@ namespace MSGProject
                     materialTabControl1.TabPages.Add(BestellingenTab);
                     Load_Bestellingen();
                     Load_Menus();
+                    GebruikersLoad();
                     break;
 
                 default:
@@ -199,7 +200,7 @@ namespace MSGProject
                 // Inform the user
                 MessageBox.Show("Bestelling succesvol geplaatst!");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Er is een fout opgetreden bij het plaatsen van een bestelling: ");
             }
