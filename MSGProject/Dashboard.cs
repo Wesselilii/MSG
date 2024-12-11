@@ -31,11 +31,11 @@ namespace MSGProject
                 MaterialSkin.Primary.Indigo700,
                 MaterialSkin.Primary.Indigo100,
                 MaterialSkin.Accent.Pink200,
-                MaterialSkin.TextShade.WHITE
+                MaterialSkin.TextShade.WHITE        
             );
         }
 
-        // Harm --------------- Welcome User ----------------------------------------------------------------------------
+        // Harm --------------- Welcome User ----------- b -----------------------------------------------------------------
         private void Dashboard_Load(object sender, EventArgs e)
         {
             // Display a welcome message
@@ -143,6 +143,62 @@ namespace MSGProject
                 BestelGTextbox4.Enabled = false;
 
                 Console.WriteLine($"Selected Menu ID: {selectedMenuId}");
+            }
+        }
+
+        private void BestelGButton1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Ensure a user is logged in
+                if (_currentUser == null)
+                {
+                    MessageBox.Show("U moet ingelogd zijn om een bestelling te plaatsen.");
+                    return;
+                }
+
+                // Ensure all fields are filled in
+                if (string.IsNullOrWhiteSpace(BestelGTextbox1.Text) || // Menu_Naam
+                    string.IsNullOrWhiteSpace(BestelGTextbox2.Text) || // Menu_Type
+                    string.IsNullOrWhiteSpace(BestelGTextbox3.Text) || // Menu_Prijs
+                    string.IsNullOrWhiteSpace(BestelGTextbox4.Text))   // Menu_Beschrijving
+                {
+                    MessageBox.Show("Vul alle velden in om verder te gaan.");
+                    return;
+                }
+
+                // Retrieve the selected Menu ID from the Tag property (set in ListView selection event)
+                if (BestelGListView1.SelectedItems.Count == 0)
+                {
+                    MessageBox.Show("Selecteer een Menu om te bestellen.");
+                    return;
+                }
+                int menuId = (int)BestelGListView1.SelectedItems[0].Tag;
+
+                // Prepare the new bestelling model
+                var newBestelling = new BestellingenModel
+                {
+                    Gebruiker_Id = _currentUser.Gebruiker_Id,
+                    Gebruiker_Voornaam = _currentUser.Gebruiker_Voornaam,
+                    Gebruiker_Achternaam = _currentUser.Gebruiker_Achternaam,
+                    Menu_Id = menuId,
+                    Bestelling_Datum = DateTime.Now,
+                    Bestelling_Status = "Actief"
+                };
+
+                // Add the bestelling to the database
+                var bestellingController = new BestellingenController();
+                bestellingController.AddBestelling(newBestelling);
+
+                // Refresh the ListView to reflect the new bestelling
+                Load_Bestellingen();
+
+                // Inform the user
+                MessageBox.Show("Bestelling succesvol geplaatst!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Er is een fout opgetreden bij het plaatsen van een bestelling: ");
             }
         }
 
