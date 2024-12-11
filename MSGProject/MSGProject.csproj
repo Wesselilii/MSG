@@ -147,6 +147,12 @@
     <Compile Include="View\Menu\EditMenu.Designer.cs">
       <DependentUpon>EditMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Startup\Register.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Startup\Register.Designer.cs">
+      <DependentUpon>Register.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -171,6 +177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Startup\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Startup\Register.resx">
+      <DependentUpon>Register.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using MaterialSkin.Controls;
 using MSGProject.Controller;
 using MSGProject.Model;
+using MSGProject.View.Startup;
 
 namespace MSGProject.View.Login
 {
@@ -31,7 +32,7 @@ namespace MSGProject.View.Login
 
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void BtnLogin_Click(object sender, EventArgs e)
         {
             // Capture email and password input
             string email = Login_Email_TextBox.Text.Trim();
@@ -39,7 +40,7 @@ namespace MSGProject.View.Login
 
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Please fill in all fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vul alle velden in.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -61,14 +62,23 @@ namespace MSGProject.View.Login
                 else
                 {
                     // Authentication failed
-                    MessageBox.Show("Invalid email or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Foute email of password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
                 // Handle unexpected errors
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Fout: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void MaterialLabel1_Click(object sender, EventArgs e)
+        {
+            // Create an instance of the RegisterForm
+            Register_Form registerForm = new Register_Form();
+
+            // Show the RegisterForm as a modal dialog
+            registerForm.Show();
         }
     }
 }

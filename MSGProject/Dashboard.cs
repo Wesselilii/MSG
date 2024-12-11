@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using MSGProject.View.Login;
 
 namespace MSGProject
 {
@@ -497,14 +498,14 @@ namespace MSGProject
         }
 
         // create button
-        private void gebruikerCreateButton_Click(object sender, EventArgs e)
+        private void GebruikerCreateButton_Click(object sender, EventArgs e)
         {
             GebruikersCreate gebruikersCreate = new GebruikersCreate(this);
             gebruikersCreate.Show();
         }
 
         // edit button
-        private void gebruikerEditButton_Click(object sender, EventArgs e)
+        private void GebruikerEditButton_Click(object sender, EventArgs e)
         {
             // check if there is a item selected
             if (gebruikerListView1.SelectedItems.Count == 0)
@@ -521,7 +522,7 @@ namespace MSGProject
         }
 
         // delete button
-        private void gebruikerDeleteButton_Click(object sender, EventArgs e)
+        private void GebruikerDeleteButton_Click(object sender, EventArgs e)
         {
             // Check if an item is selected in the ListView and ask for confirmation
             if (gebruikerListView1.SelectedItems.Count > 0 && MessageBox.Show("Weet je zeker dat je deze gebruiker wilt verwijderen?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -545,6 +546,16 @@ namespace MSGProject
             {
                 MessageBox.Show("Kies eerst een gebruiker om te verwijderen");
             }
+        }
+
+        private void Logout_Button_Click(object sender, EventArgs e)
+        {
+            // Open the login form
+            Login loginForm = new Login();
+            loginForm.Show();
+
+            // Close the current dashboard form
+            this.Hide();
         }
     }
 }

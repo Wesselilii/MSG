@@ -55,7 +55,8 @@ namespace MSGProject.Controller
         // Function that adds a user (Create)
         public void GebruikersCreate(GebruikersModel gebruiker)
         {
-            string CreateQuery = "INSERT INTO Gebruikers (Gebruiker_Voornaam, Gebruiker_Achternaam, Gebruiker_Email, Gebruiker_Wachtwoord, Gebruiker_Rol) " +
+            string checkEmailQuery = "SELECT COUNT(*) FROM Gebruikers WHERE Gebruiker_Email = @Email";
+            string createQuery = "INSERT INTO Gebruikers (Gebruiker_Voornaam, Gebruiker_Achternaam, Gebruiker_Email, Gebruiker_Wachtwoord, Gebruiker_Rol) " +
                                  "VALUES (@Voornaam, @Achternaam, @Email, @Wachtwoord, @Rol)";
 
             string password = gebruiker.Gebruiker_Wachtwoord;
@@ -64,18 +65,33 @@ namespace MSGProject.Controller
             using (MySqlConnection con = new MySqlConnection(_connectionString))
             {
                 con.Open();
-                using (MySqlCommand command = new MySqlCommand(CreateQuery, con))
-                {
-                    command.Parameters.AddWithValue("@Voornaam", gebruiker.Gebruiker_Voornaam);
-                    command.Parameters.AddWithValue("@Achternaam", gebruiker.Gebruiker_Achternaam);
-                    command.Parameters.AddWithValue("@Email", gebruiker.Gebruiker_Email);
-                    command.Parameters.AddWithValue("@Wachtwoord", hashedPassword);
-                    command.Parameters.AddWithValue("@Rol", gebruiker.Gebruiker_Rol);
 
-                    command.ExecuteNonQuery();
+                // Check if the email already exists
+                using (MySqlCommand checkCommand = new MySqlCommand(checkEmailQuery, con))
+                {
+                    checkCommand.Parameters.AddWithValue("@Email", gebruiker.Gebruiker_Email);
+                    int emailCount = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                    if (emailCount > 0)
+                    {
+                        throw new Exception("Email already exists in the database.");
+                    }
+                }
+
+                // Insert the new user if the email is unique
+                using (MySqlCommand createCommand = new MySqlCommand(createQuery, con))
+                {
+                    createCommand.Parameters.AddWithValue("@Voornaam", gebruiker.Gebruiker_Voornaam);
+                    createCommand.Parameters.AddWithValue("@Achternaam", gebruiker.Gebruiker_Achternaam);
+                    createCommand.Parameters.AddWithValue("@Email", gebruiker.Gebruiker_Email);
+                    createCommand.Parameters.AddWithValue("@Wachtwoord", hashedPassword);
+                    createCommand.Parameters.AddWithValue("@Rol", gebruiker.Gebruiker_Rol);
+
+                    createCommand.ExecuteNonQuery();
                 }
             }
         }
+
 
         // Function that edits a user (Update)
         public void GebruikersUpdate(GebruikersModel gebruiker)
