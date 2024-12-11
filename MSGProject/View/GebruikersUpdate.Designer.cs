@@ -127,7 +127,7 @@
             this.RolComboBox.Items.AddRange(new object[] {
             "Administratie",
             "Chef",
-            "Gebruiker"});
+            "Klant"});
             this.RolComboBox.Location = new System.Drawing.Point(470, 293);
             this.RolComboBox.MaxDropDownItems = 4;
             this.RolComboBox.MouseState = MaterialSkin.MouseState.OUT;
