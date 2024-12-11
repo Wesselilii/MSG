@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
-            this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
             this.HomeTab = new System.Windows.Forms.TabPage();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.Dashboard_Welcome_Label = new MaterialSkin.Controls.MaterialLabel();
@@ -99,7 +98,6 @@
             this.materialCard1.SuspendLayout();
             this.MaaltijdTab.SuspendLayout();
             this.BestellingenTab.SuspendLayout();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.materialTabControl1.SuspendLayout();
             this.GBestellingenTab.SuspendLayout();
             this.GebruikersTab.SuspendLayout();
@@ -1038,7 +1036,6 @@
             this.BestelGTextbox1.UseTallSize = false;
             // 
             // BestelGLabel1
-            // imageList1
             // 
             this.BestelGLabel1.AutoSize = true;
             this.BestelGLabel1.Depth = 0;
@@ -1049,13 +1046,7 @@
             this.BestelGLabel1.Name = "BestelGLabel1";
             this.BestelGLabel1.Size = new System.Drawing.Size(41, 19);
             this.BestelGLabel1.TabIndex = 0;
-            this.BestelGLabel1.Text = "Menu";
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "rice-32.png");
-            this.imageList1.Images.SetKeyName(1, "truck-32.png");
-            this.imageList1.Images.SetKeyName(2, "user-32.png");
-            this.imageList1.Images.SetKeyName(3, "home-32.png");
+            this.BestelGLabel1.Text = "Menu";      
             // 
             // Dashboard
             // 
