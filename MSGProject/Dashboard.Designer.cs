@@ -631,7 +631,7 @@
             // 
             this.BestelAHeader4.Text = "Datum";
             this.BestelAHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.BestelAHeader4.Width = 90;
+            this.BestelAHeader4.Width = 125;
             // 
             // BestelAHeader5
             // 
@@ -950,12 +950,12 @@
             // BestelGHeader1
             // 
             this.BestelGHeader1.Text = "Menu";
-            this.BestelGHeader1.Width = 110;
+            this.BestelGHeader1.Width = 150;
             // 
             // BestelGHeader2
             // 
             this.BestelGHeader2.Text = "Type";
-            this.BestelGHeader2.Width = 80;
+            this.BestelGHeader2.Width = 90;
             // 
             // BestelGHeader3
             // 
